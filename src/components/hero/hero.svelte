@@ -1,46 +1,180 @@
-<script lang="ts">
-	import { Button, buttonVariants } from '@/components/ui/button';
+<script>
+	import { Star } from '@/components/icons';
 </script>
 
-<div class="space-y-4">
-	<h1 class="text-center text-5xl font-bold">sonner-svelte</h1>
+<div class="wrapper">
+	<div class="toastWrapper">
+		<div class="toast" />
+		<div class="toast" />
+		<div class="toast" />
+	</div>
 
-	<div>
-		<p class="text-center">An opinionated toast component</p>
-		<p class="text-center">
-			ported from
-			<a class="font-semibold hover:underline" href="https://sonner.emilkowal.ski/" target="_blank"
-				>Sonner</a
-			>
-		</p>
-	</div>
-	<div class="flex gap-2 flex-wrap justify-center">
-		<Button intent="primary" size="lg" class="w-40">
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				width="16"
-				height="16"
-				viewBox="0 0 24 24"
-				fill="white"
-				stroke="currentColor"
-				stroke-width="1.5"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-			>
-				<path
-					d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"
-				/>
-				<path d="M5 3v4" />
-				<path d="M19 17v4" />
-				<path d="M3 5h4" />
-				<path d="M17 19h4" />
-			</svg>
+	<h1 class="heading">sonner-svelte</h1>
+	<p>An opinionated toast component</p>
+
+	<div class="buttons">
+		<button data-primary class="button">
+			<svelte:component this={Star} width="14" height="14" />
 			<span>Render Toast</span>
-		</Button>
-		<a
-			class={buttonVariants({ intent: 'secondary', size: 'lg', class: 'w-40' })}
-			href="https://github.com/devloop01/sonner-svelte"
-			target="_blank">Github</a
-		>
+		</button>
+		<a class="button" href="https://github.com/devloop01/sonner-svelte" target="_blank">Github</a>
 	</div>
+
+	<p>
+		port of <a class="link" href="https://sonner.emilkowal.ski/" target="_blank">sonner</a>
+	</p>
 </div>
+
+<style lang="postcss">
+	.wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+		align-items: center;
+	}
+
+	.toastWrapper {
+		display: flex;
+		flex-direction: column;
+		margin: 0 auto;
+		height: 100px;
+		width: 400px;
+		position: relative;
+		mask-image: linear-gradient(to top, transparent 0%, black 35%);
+		opacity: 1;
+	}
+
+	.toast {
+		width: 356px;
+		height: 40px;
+		background: var(--gray0);
+		box-shadow: 0 4px 12px #0000001a;
+		border: 1px solid var(--gray3);
+		border-radius: var(--radius);
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+
+	.toast:nth-child(1) {
+		transform: translateY(-60%) translateX(-50%) scale(0.9);
+	}
+
+	.toast:nth-child(2) {
+		transform: translateY(-30%) translateX(-50%) scale(0.95);
+	}
+
+	.buttons {
+		display: flex;
+		gap: 8px;
+		margin-top: 16px;
+	}
+
+	.button {
+		height: 40px;
+		border-radius: var(--radius);
+		border: none;
+		background: linear-gradient(156deg, rgba(255, 255, 255, 1) 0%, rgba(240, 240, 240, 1) 100%);
+		padding: 0 30px;
+		font-weight: 600;
+		flex-shrink: 0;
+		font-family: inherit;
+		box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.06), 0px 1px 0px 0px rgba(0, 0, 0, 0.08),
+			0px 2px 2px 0px rgba(0, 0, 0, 0.04), 0px 3px 3px 0px rgba(0, 0, 0, 0.02),
+			0px 4px 4px 0px rgba(0, 0, 0, 0.01);
+		position: relative;
+		overflow: hidden;
+		cursor: pointer;
+		text-decoration: none;
+		color: hsl(0, 0%, 9%);
+		font-size: 13px;
+		display: inline-flex;
+		align-items: center;
+		gap: 4px;
+		justify-content: center;
+		transition: box-shadow 200ms, background 200ms;
+		width: 164px;
+	}
+
+	.button[data-primary] {
+		box-shadow: 0px 0px 0px 1px var(--gray12);
+		background: var(--gray12);
+		color: var(--gray1);
+	}
+	.button:focus-visible {
+		outline: none;
+		box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.06), 0px 1px 0px 0px rgba(0, 0, 0, 0.08),
+			0px 2px 2px 0px rgba(0, 0, 0, 0.04), 0px 3px 3px 0px rgba(0, 0, 0, 0.02),
+			0px 4px 4px 0px rgba(0, 0, 0, 0.01), 0 0 0 2px rgba(0, 0, 0, 0.15);
+	}
+
+	.button::after {
+		content: '';
+		position: absolute;
+		top: 100%;
+		background: blue;
+		left: 0;
+		width: 100%;
+		height: 35%;
+		background: linear-gradient(
+			to top,
+			hsl(0, 0%, 91%) 0%,
+			hsla(0, 0%, 91%, 0.987) 8.1%,
+			hsla(0, 0%, 91%, 0.951) 15.5%,
+			hsla(0, 0%, 91%, 0.896) 22.5%,
+			hsla(0, 0%, 91%, 0.825) 29%,
+			hsla(0, 0%, 91%, 0.741) 35.3%,
+			hsla(0, 0%, 91%, 0.648) 41.2%,
+			hsla(0, 0%, 91%, 0.55) 47.1%,
+			hsla(0, 0%, 91%, 0.45) 52.9%,
+			hsla(0, 0%, 91%, 0.352) 58.8%,
+			hsla(0, 0%, 91%, 0.259) 64.7%,
+			hsla(0, 0%, 91%, 0.175) 71%,
+			hsla(0, 0%, 91%, 0.104) 77.5%,
+			hsla(0, 0%, 91%, 0.049) 84.5%,
+			hsla(0, 0%, 91%, 0.013) 91.9%,
+			hsla(0, 0%, 91%, 0) 100%
+		);
+		opacity: 0.6;
+		transition: transform 200ms;
+	}
+
+	.button:hover:not([data-primary]):after {
+		transform: translateY(-100%);
+	}
+
+	.button[data-primary]:hover {
+		background: rgb(52, 52, 52);
+	}
+
+	.heading {
+		font-size: 48px;
+		font-weight: 700;
+		margin: -20px 0 12px;
+		text-align: center;
+		line-height: 0.9;
+		@media (max-width: 420px) {
+			font-size: 38px;
+		}
+	}
+
+	@media (max-width: 420px) {
+		.toastWrapper {
+			width: 100%;
+		}
+
+		.buttons {
+			flex-direction: column;
+			gap: 8px;
+		}
+	}
+
+	.link {
+		font-weight: 600;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+</style>

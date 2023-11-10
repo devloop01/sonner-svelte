@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { Button } from '@/components/ui/button';
 	import { CodeBlock } from '@/components/code-block';
 
 	import { allOtherTypes, getSnippet } from './index';
@@ -9,18 +8,22 @@
 	$: snippet = getSnippet(activeType);
 </script>
 
-<div class="space-y-2">
-	<h3 class="font-semibold text-xl">Other</h3>
+<section>
+	<h3>Other</h3>
 
-	<div class="flex gap-2 flex-wrap">
+	<div class="buttons">
 		{#each allOtherTypes as type (type.name)}
-			<Button on:click={() => (activeType = type)}>
+			<button
+				class="button"
+				data-active={type.name === activeType.name || undefined}
+				on:click={() => (activeType = type)}
+			>
 				{type.name}
-			</Button>
+			</button>
 		{/each}
 	</div>
 
 	{#key activeType.name}
 		<CodeBlock code={snippet} language="js" />
 	{/key}
-</div>
+</section>

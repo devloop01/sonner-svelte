@@ -43,7 +43,7 @@
 		gap: 4px;
 		font-weight: 600;
 		padding: 4px 6px;
-		border-radius: 6px;
+		border-radius: var(--radius);
 		transition: background 0.2s ease;
 	}
 

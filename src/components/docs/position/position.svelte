@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { Button } from '@/components/ui/button';
 	import { CodeBlock } from '@/components/code-block';
 
 	const positions = [
@@ -19,22 +18,23 @@
 	$: snippet = `<Toaster position="${activePosition}" />`;
 </script>
 
-<div class="space-y-2">
-	<h3 class="font-semibold text-xl">Position</h3>
-	<p class="text-black/80">Swipe direction changes depending on the position.</p>
+<section>
+	<h3>Position</h3>
+	<p>Swipe direction changes depending on the position.</p>
 
-	<div class="flex gap-2 flex-wrap">
+	<div class="buttons">
 		{#each positions as position (position)}
-			<Button
+			<button
+				class="button"
 				data-active={activePosition === position || undefined}
 				on:click={() => (activePosition = position)}
 			>
 				{position}
-			</Button>
+			</button>
 		{/each}
 	</div>
 
 	{#key activePosition}
 		<CodeBlock code={snippet} />
 	{/key}
-</div>
+</section>

@@ -1,9 +1,15 @@
 <script>
-	import '@/app.css';
+	import '@/styles/app.postcss';
 </script>
 
-<div class="max-w-2xl mx-auto">
-	<div class="flex flex-col justify-center items-center">
+<div class="wrapper">
+	<div class="container">
 		<slot />
 	</div>
 </div>
+
+<style>
+	.wrapper {
+		padding-top: 100px;
+	}
+</style>
