@@ -1,12 +1,11 @@
 <script lang="ts">
-	import { cx } from 'cva';
 	import { scale } from 'svelte/transition';
 	import { copy } from '@svelte-put/copy';
 
+	import { Check, Copy } from '@/components/icons';
+
 	export let text: string;
 	export let copied = false;
-	let className: string | undefined = undefined;
-	export { className as class };
 
 	function handleCopied() {
 		copied = true;
@@ -16,70 +15,47 @@
 
 <button
 	aria-label="Copy code"
-	class={cx('btn--copy', className)}
+	class="copyBtn"
 	use:copy={{ text }}
 	on:copied={handleCopied}
+	{...$$restProps}
 >
 	{#if copied}
 		<div transition:scale>
-			<svg
-				viewBox="0 0 24 24"
-				width="14"
-				height="14"
-				stroke="currentColor"
-				stroke-width="1.5"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				fill="none"
-				shape-rendering="geometricPrecision"
-			>
-				<path d="M20 6L9 17l-5-5" />
-			</svg>
+			<svelte:component this={Copy} width="14" height="14" />
 		</div>
 	{:else}
 		<div transition:scale>
-			<svg
-				viewBox="0 0 24 24"
-				width="14"
-				height="14"
-				stroke="currentColor"
-				stroke-width="1.5"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				fill="none"
-				shape-rendering="geometricPrecision"
-			>
-				<path
-					d="M8 17.929H6c-1.105 0-2-.912-2-2.036V5.036C4 3.91 4.895 3 6 3h8c1.105 0 2 .911 2 2.036v1.866m-6 .17h8c1.105 0 2 .91 2 2.035v10.857C20 21.09 19.105 22 18 22h-8c-1.105 0-2-.911-2-2.036V9.107c0-1.124.895-2.036 2-2.036z"
-				/>
-			</svg>
+			<svelte:component this={Check} width="14" height="14" />
 		</div>
 	{/if}
 </button>
 
-<style lang="postcss">
-	.btn--copy {
+<style>
+	.copyBtn {
 		cursor: copy;
-		border-radius: 50%;
 		border: none;
-		border: 1px solid theme(colors.gray.300);
+		border: 1px solid var(--gray6);
 		background: #fff;
-		color: theme(colors.gray.800);
-		border-radius: 5px;
-		width: theme(width.7);
-		height: theme(width.7);
+		color: var(--gray12);
+		border-radius: var(--radius);
+		width: 28px;
+		height: 28px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-	}
 
-	.btn--copy:focus {
-		outline: none;
-		@apply ring-1 ring-black/40;
-	}
+		& > div {
+			position: absolute;
+			display: flex;
+		}
 
-	.btn--copy div {
-		position: absolute;
-		display: flex;
+		&:focus {
+			outline: none;
+		}
+
+		&:focus-visible {
+			box-shadow: 0 0 0 2px var(--gray8);
+		}
 	}
 </style>

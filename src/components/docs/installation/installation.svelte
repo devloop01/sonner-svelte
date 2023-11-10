@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { copy } from '@svelte-put/copy';
 	import { crossfade } from 'svelte/transition';
-	import { cubicInOut } from 'svelte/easing';
+	import { circOut } from 'svelte/easing';
 
 	import { CopyButton } from '@/components/copy-button';
 
@@ -17,8 +17,8 @@
 	let currentInstaller = installers[0];
 
 	const [send, receive] = crossfade({
-		duration: 250,
-		easing: cubicInOut
+		duration: 200,
+		easing: circOut
 	});
 
 	function handleCopied() {
@@ -27,20 +27,17 @@
 	}
 </script>
 
-<div class="space-y-2">
-	<div class="flex justify-between">
-		<h3 class="font-semibold text-xl">Installation</h3>
-		<div class="flex items-center gap-2">
+<section>
+	<div>
+		<h3>Installation</h3>
+		<div class="switcher">
 			{#each installers as installer (installer.name)}
 				{@const isActive = installer.name === currentInstaller.name}
-				<button
-					data-active={isActive || undefined}
-					class="relative px-2 py-1 rounded-md text-sm border focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-black/40"
-					on:click={() => (currentInstaller = installer)}
-				>
+
+				<button on:click={() => (currentInstaller = installer)}>
 					{#if isActive}
 						<div
-							class="absolute inset-0 rounded-md bg-black/10"
+							class="switcher__indicator"
 							in:send={{ key: 'active' }}
 							out:receive={{ key: 'active' }}
 						/>
@@ -52,32 +49,78 @@
 	</div>
 
 	<div class="code__wrapper" bind:this={trigger}>
-		<code class="code" use:copy={{ trigger }} on:copied={handleCopied}>
+		<code use:copy={{ trigger }} on:copied={handleCopied}>
 			{currentInstaller.command}
 		</code>
-		<CopyButton
-			{copied}
-			text={currentInstaller.command}
-			class="absolute top-1/2 right-2 -translate-y-1/2"
-		/>
+		<CopyButton {copied} text={currentInstaller.command} />
 	</div>
-</div>
+</section>
 
 <style lang="postcss">
-	.code__wrapper {
-		padding: 0 62px 0 12px;
-		border-radius: 6px;
-		background: theme(colors.gray.50);
-		position: relative;
-		height: 40px;
-		border: 1px solid theme(colors.gray.200);
+	section > div:not(.code__wrapper) {
 		display: flex;
 		align-items: center;
-		cursor: copy;
+		justify-content: space-between;
 	}
 
-	.code__wrapper .code {
-		font-family: theme(fontFamily.mono);
-		font-size: 14px;
+	.switcher {
+		position: relative;
+		display: flex;
+		align-items: center;
+		border-radius: var(--radius);
+		border: 1px solid var(--gray6);
+
+		& button {
+			position: relative;
+			padding: 2px 8px;
+			border-radius: var(--radius);
+			color: var(--gray12);
+			font-size: 14px;
+			cursor: pointer;
+			transition-property: background, color;
+			transition-duration: 220ms;
+			transition-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+
+			& .switcher__indicator {
+				position: absolute;
+				inset: 0;
+				background: var(--gray3);
+				border-radius: var(--radius);
+				z-index: -1;
+			}
+
+			&:focus {
+				outline: none;
+			}
+
+			&:focus-visible {
+				box-shadow: 0 0 0 2px var(--gray8);
+			}
+		}
+	}
+
+	.code__wrapper {
+		position: relative;
+		display: flex;
+		align-items: center;
+		height: 40px;
+		padding: 0 12px;
+		margin-top: 8px;
+		border-radius: var(--radius);
+		background: var(--gray2);
+		border: 1px solid var(--gray6);
+		cursor: copy;
+
+		& code {
+			font-family: var(--font-mono);
+			font-size: 14px;
+		}
+
+		& button {
+			position: absolute;
+			top: 50%;
+			right: 8px;
+			transform: translateY(-50%);
+		}
 	}
 </style>
