@@ -11,13 +11,21 @@
 	} from '@/components/docs';
 </script>
 
-<Hero />
-<main class="content">
-	<Installation />
-	<Usage />
-	<Types />
-	<Position position="bottom-right" />
-	<ExpandModes expand />
-	<Other />
-</main>
-<Footer />
+<div class="container">
+	<Hero />
+	<main class="content">
+		<Installation />
+		<Usage />
+		<Types />
+		<Position position="bottom-right" />
+		<ExpandModes expand />
+		<Other />
+	</main>
+	<Footer />
+</div>
+
+<style>
+	.container {
+		padding-top: 100px;
+	}
+</style>
