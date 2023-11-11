@@ -4,14 +4,15 @@
 	import { circOut } from 'svelte/easing';
 
 	import { CopyButton } from '@/components/copy-button';
+	import { Npm, Pnpm, Yarn } from '@/components/icons';
 
 	let trigger: HTMLElement;
 	let copied = false;
 
 	const installers = [
-		{ name: 'npm', command: 'npm install sonner-svelte' },
-		{ name: 'pnpm', command: 'pnpm add sonner-svelte' },
-		{ name: 'yarn', command: 'yarn add sonner-svelte' }
+		{ name: 'npm', command: 'npm install sonner-svelte', icon: Npm },
+		{ name: 'pnpm', command: 'pnpm add sonner-svelte', icon: Pnpm },
+		{ name: 'yarn', command: 'yarn add sonner-svelte', icon: Yarn }
 	];
 
 	let currentInstaller = installers[0];
@@ -30,11 +31,16 @@
 <section>
 	<div>
 		<h3>Installation</h3>
-		<div class="switcher">
+		<div class="switcher" role="tablist">
 			{#each installers as installer (installer.name)}
 				{@const isActive = installer.name === currentInstaller.name}
 
-				<button on:click={() => (currentInstaller = installer)}>
+				<button
+					type="button"
+					role="tab"
+					data-active={isActive || undefined}
+					on:click={() => (currentInstaller = installer)}
+				>
 					{#if isActive}
 						<div
 							class="switcher__indicator"
@@ -42,7 +48,7 @@
 							out:receive={{ key: 'active' }}
 						/>
 					{/if}
-					<span>{installer.name}</span>
+					<svelte:component this={installer.icon} width="12" height="12" />
 				</button>
 			{/each}
 		</div>
@@ -72,19 +78,23 @@
 
 		& button {
 			position: relative;
-			padding: 2px 8px;
-			border-radius: var(--radius);
+			display: inline-flex;
+			align-items: center;
+			gap: 4px;
+			padding: 8px;
 			color: var(--gray12);
-			font-size: 14px;
+			border-radius: var(--radius);
 			cursor: pointer;
-			transition-property: background, color;
-			transition-duration: 220ms;
-			transition-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+
+			& svg {
+				transition: opacity 180ms ease-out;
+				opacity: 0.3;
+			}
 
 			& .switcher__indicator {
 				position: absolute;
-				inset: 0;
-				background: var(--gray3);
+				inset: 2px;
+				background: var(--gray5);
 				border-radius: var(--radius);
 				z-index: -1;
 			}
@@ -95,6 +105,12 @@
 
 			&:focus-visible {
 				box-shadow: 0 0 0 2px var(--gray8);
+			}
+
+			&[data-active] {
+				& svg {
+					opacity: 1;
+				}
 			}
 		}
 	}

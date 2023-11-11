@@ -11,6 +11,9 @@
 
 	<h1 class="heading">sonner-svelte</h1>
 	<p>An opinionated toast component</p>
+	<p style="color: var(--gray11);">
+		ported from <a class="link" href="https://sonner.emilkowal.ski/" target="_blank">sonner</a>
+	</p>
 
 	<div class="buttons">
 		<button data-primary class="button">
@@ -19,17 +22,12 @@
 		</button>
 		<a class="button" href="https://github.com/devloop01/sonner-svelte" target="_blank">Github</a>
 	</div>
-
-	<p>
-		port of <a class="link" href="https://sonner.emilkowal.ski/" target="_blank">sonner</a>
-	</p>
 </div>
 
 <style lang="postcss">
 	.wrapper {
 		display: flex;
 		flex-direction: column;
-		gap: 12px;
 		align-items: center;
 	}
 
@@ -68,7 +66,7 @@
 	.buttons {
 		display: flex;
 		gap: 8px;
-		margin-top: 16px;
+		margin-top: 32px;
 	}
 
 	.button {
@@ -80,8 +78,11 @@
 		font-weight: 600;
 		flex-shrink: 0;
 		font-family: inherit;
-		box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.06), 0px 1px 0px 0px rgba(0, 0, 0, 0.08),
-			0px 2px 2px 0px rgba(0, 0, 0, 0.04), 0px 3px 3px 0px rgba(0, 0, 0, 0.02),
+		box-shadow:
+			0px 0px 0px 1px rgba(0, 0, 0, 0.06),
+			0px 1px 0px 0px rgba(0, 0, 0, 0.08),
+			0px 2px 2px 0px rgba(0, 0, 0, 0.04),
+			0px 3px 3px 0px rgba(0, 0, 0, 0.02),
 			0px 4px 4px 0px rgba(0, 0, 0, 0.01);
 		position: relative;
 		overflow: hidden;
@@ -93,7 +94,9 @@
 		align-items: center;
 		gap: 4px;
 		justify-content: center;
-		transition: box-shadow 200ms, background 200ms;
+		transition:
+			box-shadow 200ms,
+			background 200ms;
 		width: 164px;
 	}
 
@@ -104,9 +107,13 @@
 	}
 	.button:focus-visible {
 		outline: none;
-		box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.06), 0px 1px 0px 0px rgba(0, 0, 0, 0.08),
-			0px 2px 2px 0px rgba(0, 0, 0, 0.04), 0px 3px 3px 0px rgba(0, 0, 0, 0.02),
-			0px 4px 4px 0px rgba(0, 0, 0, 0.01), 0 0 0 2px rgba(0, 0, 0, 0.15);
+		box-shadow:
+			0px 0px 0px 1px rgba(0, 0, 0, 0.06),
+			0px 1px 0px 0px rgba(0, 0, 0, 0.08),
+			0px 2px 2px 0px rgba(0, 0, 0, 0.04),
+			0px 3px 3px 0px rgba(0, 0, 0, 0.02),
+			0px 4px 4px 0px rgba(0, 0, 0, 0.01),
+			0 0 0 2px rgba(0, 0, 0, 0.15);
 	}
 
 	.button::after {
@@ -151,7 +158,7 @@
 	.heading {
 		font-size: 48px;
 		font-weight: 700;
-		margin: -20px 0 12px;
+		margin: -20px 0 24px;
 		text-align: center;
 		line-height: 0.9;
 		@media (max-width: 420px) {
