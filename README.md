@@ -48,6 +48,6 @@ Add `<Toaster />` in your app root. This is where the toast notifications will b
 
 For more examples, check out the [website](https://sonner-svelte.vercel.app/)
 
-## Inspiration
+## Acknowledgements
 
 Thanks to the original author [@emilkowalski](https://github.com/emilkowalski) for creating [sonner](https://github.com/emilkowalski/sonner)
