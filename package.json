@@ -1,6 +1,19 @@
 {
 	"name": "sonner-svelte",
+	"description": "An opinionated toast library for Svelte",
 	"version": "0.0.1",
+	"author": "Sikriti Dakua <sikriti.dev@gmail.com>",
+	"license": "MIT",
+	"keywords": [
+		"svelte",
+		"toast",
+		"notifications",
+		"snackbar"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/devloop01/sonner-svelte"
+	},
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run package",
