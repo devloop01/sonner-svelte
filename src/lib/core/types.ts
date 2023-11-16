@@ -34,6 +34,9 @@ export interface Toast {
 	unstyled?: boolean;
 	promise?: boolean;
 	pauseDuration: number;
+	// closeDelay: number;
+	// timeout: number | null;
+	// pausedAt?: number;
 	delete?: boolean;
 	// height?: number;
 }

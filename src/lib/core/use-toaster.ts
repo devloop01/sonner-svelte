@@ -1,11 +1,9 @@
-import type { Toast, ToastOptions } from './types';
+import type { Toast } from './types';
 import { onDestroy } from 'svelte';
-import { createToastsStore } from './store';
+import { toasts } from './store';
 import { toast } from './toast';
 
-export default function useToaster(toastOptions?: ToastOptions) {
-	const toasts = createToastsStore(toastOptions);
-
+export default function useToaster() {
 	const timeouts = new Map<Toast['id'], ReturnType<typeof setTimeout>>();
 	let _pausedAt: number | null;
 
@@ -36,7 +34,7 @@ export default function useToaster(toastOptions?: ToastOptions) {
 				const durationLeft = (t.duration || 0) + t.pauseDuration - (now - t.createdAt);
 
 				if (durationLeft < 0) {
-					if (t.visible) {
+					if (!t.delete) {
 						// FIXME: This causes a recursive cycle of updates.
 						toast.dismiss(t.id);
 					}
@@ -49,6 +47,7 @@ export default function useToaster(toastOptions?: ToastOptions) {
 			}
 		})
 	];
+
 	onDestroy(() => {
 		for (const unsubscribe of unsubscribes) {
 			unsubscribe();
