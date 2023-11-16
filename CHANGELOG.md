@@ -1,5 +1,11 @@
 # sonner-svelte
 
+## 0.1.4
+
+### Patch Changes
+
+- fix: lib imports file extensions ([#9](https://github.com/devloop01/sonner-svelte/pull/9))
+
 ## 0.1.3
 
 ### Patch Changes
