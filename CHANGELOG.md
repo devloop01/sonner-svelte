@@ -1,5 +1,13 @@
 # sonner-svelte
 
+## 0.1.1
+
+### Patch Changes
+
+- fix: use portal to render `<Toaster/>` ([#4](https://github.com/devloop01/sonner-svelte/pull/4))
+
+- feat: add portal action ([#4](https://github.com/devloop01/sonner-svelte/pull/4))
+
 ## 0.1.0
 
 ### Minor Changes
