@@ -1,5 +1,7 @@
 <script>
-	import { Star } from '@/components/icons';
+	import { Star, Logo } from '@/components/icons';
+
+	import { toast } from '@/lib';
 </script>
 
 <div class="wrapper">
@@ -9,19 +11,24 @@
 		<div class="toast" />
 	</div>
 
-	<h1 class="heading">sonner-svelte</h1>
-	<p>An opinionated toast component</p>
-	<p style="color: var(--gray11);">
-		ported from <a class="link" href="https://sonner.emilkowal.ski/" target="_blank">sonner</a>
-	</p>
+	<h1 class="heading">
+		<span class="sr-only">sonner-svelte</span>
+		<Logo aria-label="sonner-svelte" />
+	</h1>
+
+	<p>An opinionated toast component for svelte</p>
 
 	<div class="buttons">
-		<button data-primary class="button">
+		<button data-primary class="button" on:click={() => toast.message('Hello from toast!')}>
 			<svelte:component this={Star} width="14" height="14" />
 			<span>Render Toast</span>
 		</button>
 		<a class="button" href="https://github.com/devloop01/sonner-svelte" target="_blank">Github</a>
 	</div>
+
+	<p>
+		ported from <a class="link" href="https://sonner.emilkowal.ski/" target="_blank">sonner</a>
+	</p>
 </div>
 
 <style lang="postcss">
@@ -66,7 +73,7 @@
 	.buttons {
 		display: flex;
 		gap: 8px;
-		margin-top: 32px;
+		margin: 22px 0;
 	}
 
 	.button {
@@ -156,13 +163,9 @@
 	}
 
 	.heading {
-		font-size: 48px;
-		font-weight: 700;
-		margin: -20px 0 24px;
-		text-align: center;
-		line-height: 0.9;
-		@media (max-width: 420px) {
-			font-size: 38px;
+		margin: -20px 0 14px;
+		& > svg {
+			height: 62px;
 		}
 	}
 
