@@ -9,6 +9,8 @@
 		Expand as ExpandModes,
 		Other
 	} from '@/components/docs';
+
+	import { Toaster } from '@/lib';
 </script>
 
 <div class="container">
@@ -23,6 +25,8 @@
 	</main>
 	<Footer />
 </div>
+
+<Toaster />
 
 <style>
 	.container {

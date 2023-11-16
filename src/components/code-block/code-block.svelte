@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Prism from 'prismjs';
-	import 'prismjs/plugins/normalize-whitespace/prism-normalize-whitespace';
 	import 'prism-svelte';
 
 	import { CopyButton } from '@/components/copy-button';
@@ -9,21 +8,24 @@
 	export let language = 'svelte';
 	let grammar = Prism.languages[language];
 
-	let formattedCode = Prism.plugins.NormalizeWhitespace.normalize(code);
-	formattedCode = Prism.highlight(code, grammar, language);
+	let formattedCode = Prism.highlight(code, grammar, language);
 </script>
 
 <div class="code-block">
-	<pre class="language-{language}">{@html formattedCode}</pre>
+	<pre class="language-{language}"><code class="language-{language}">{@html formattedCode}</code
+		></pre>
 	<CopyButton text={code} />
 </div>
 
 <style lang="postcss">
 	.code-block {
 		position: relative;
+		display: grid;
 
 		& > pre {
 			font-size: 14px;
+			display: block;
+			margin: 0;
 		}
 
 		& > button {
@@ -34,7 +36,7 @@
 			scale: 0.75;
 			transition: 150ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
 			transition-property: opacity, scale, box-shadow;
-			transition-delay: 600ms;
+			transition-delay: 300ms;
 		}
 
 		&:hover button,

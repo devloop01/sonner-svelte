@@ -1,5 +1,7 @@
 export { default as Types } from './types.svelte';
 
+import { toast } from '@/lib';
+
 interface Type {
 	name: string;
 	snippet: string;
@@ -10,38 +12,38 @@ const promiseCode = '`${data.name} toast has been added`';
 export const allTypes: Type[] = [
 	{
 		name: 'Default',
-		snippet: `toast('Event has been created')`
-		// action: () => toast('Event has been created'),
+		snippet: `toast('Event has been created')`,
+		action: () => toast('Event has been created')
 	},
 	{
 		name: 'Description',
 		snippet: `toast.message('Event has been created', {
   description: 'Monday, January 3rd at 6:00pm',
-})`
-		// action: () =>
-		//   toast('Event has been created', {
-		//     description: 'Monday, January 3rd at 6:00pm',
-		//   }),
+})`,
+		action: () =>
+			toast('Event has been created', {
+				description: 'Monday, January 3rd at 6:00pm'
+			})
 	},
 	{
 		name: 'Success',
-		snippet: `toast.success('Event has been created')`
-		// action: () => toast.success('Event has been created')
+		snippet: `toast.success('Event has been created')`,
+		action: () => toast.success('Event has been created')
 	},
 	{
 		name: 'Info',
-		snippet: `toast.info('Be at the area 10 minutes before the event time')`
-		// action: () => toast.info('Be at the area 10 minutes before the event time')
+		snippet: `toast.info('Be at the area 10 minutes before the event time')`,
+		action: () => toast.info('Be at the area 10 minutes before the event time')
 	},
 	{
 		name: 'Warning',
-		snippet: `toast.warning('Event start time cannot be earlier than 8am')`
-		// action: () => toast.warning('Event start time cannot be earlier than 8am')
+		snippet: `toast.warning('Event start time cannot be earlier than 8am')`,
+		action: () => toast.warning('Event start time cannot be earlier than 8am')
 	},
 	{
 		name: 'Error',
-		snippet: `toast.error('Event has not been created')`
-		// action: () => toast.error('Event has not been created')
+		snippet: `toast.error('Event has not been created')`,
+		action: () => toast.error('Event has not been created')
 	},
 	{
 		name: 'Action',
