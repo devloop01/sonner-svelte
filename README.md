@@ -1,9 +1,9 @@
 <p align="center">
-<img src="./static/og.png" alt="" />
+<img src="./banner.png" alt="" />
 </p>
 <p align="center">
-<img src="https://badgen.net/badge/license/MIT/blue" />
-<img src="https://badgen.net/npm/v/sonner-svelte" />
+<img src="https://img.shields.io/npm/l/sonner-svelte" />
+<img src="https://img.shields.io/npm/v/sonner-svelte?color=cb3837" />
 </p>
 <p align="center">
 <a href="https://sonner-svelte.vercel.app">Website</a> · <a href="https://npmjs.com/package/sonner-svelte">NPM Package</a>
