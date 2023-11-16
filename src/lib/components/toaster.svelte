@@ -56,6 +56,7 @@
 	} from '../core/constants';
 	import { ctx } from '../core/ctx';
 	import { toasts, heights } from '../core/store';
+	import { portal } from '../actions/portal';
 	import Toast from './toast.svelte';
 
 	type $$Props = ToasterProps;
@@ -213,7 +214,7 @@
 <svelte:document on:keydown={handleKeyDown} />
 
 {#if $toasts.length}
-	<section aria-label={`Notifications ${hotkeyLabel}`} tabIndex={-1}>
+	<section aria-label={`Notifications ${hotkeyLabel}`} tabIndex={-1} use:portal>
 		{#each possiblePositions as position, index (position)}
 			{@const [y, x] = position.split('-')}
 			{@const filteredToasts = $toasts.filter(
