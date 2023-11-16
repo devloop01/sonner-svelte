@@ -1,5 +1,11 @@
 # sonner-svelte
 
+## 0.1.2
+
+### Patch Changes
+
+- chore: remove unwanted deps ([`5b692cc`](https://github.com/devloop01/sonner-svelte/commit/5b692cc8a7d794e636980ef904561cbd991aaa9d))
+
 ## 0.1.1
 
 ### Patch Changes
