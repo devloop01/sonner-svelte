@@ -2,7 +2,7 @@
 	import Prism from 'prismjs';
 	import 'prism-svelte';
 
-	import { CopyButton } from '@/components/copy-button';
+	import CopyButton from './copy-button.svelte';
 
 	export let code: string;
 	export let language = 'svelte';

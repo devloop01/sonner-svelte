@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { Hero } from '@/components/hero';
-	import { Footer } from '@/components/footer';
+	import { SiteHero, SiteFooter } from '@/docs/components';
 	import {
 		Installation,
 		Usage,
@@ -8,13 +7,13 @@
 		Position,
 		Expand as ExpandModes,
 		Other
-	} from '@/components/docs';
+	} from '@/docs/components/sections';
 
 	import { Toaster } from '@/lib';
 </script>
 
 <div class="container">
-	<Hero />
+	<SiteHero />
 	<main class="content">
 		<Installation />
 		<Usage />
@@ -23,7 +22,7 @@
 		<ExpandModes expand />
 		<Other />
 	</main>
-	<Footer />
+	<SiteFooter />
 </div>
 
 <Toaster />

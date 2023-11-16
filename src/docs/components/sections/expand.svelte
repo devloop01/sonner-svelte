@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { CodeBlock } from '@/components/code-block';
+	import CodeBlock from '@/docs/components/code-block.svelte';
 
 	export let expand: boolean;
 

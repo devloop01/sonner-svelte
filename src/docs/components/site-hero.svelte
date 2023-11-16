@@ -1,5 +1,5 @@
 <script>
-	import { Star, Logo } from '@/components/icons';
+	import { Star, Logo } from '@/docs/components/icons';
 
 	import { toast } from '@/lib';
 </script>

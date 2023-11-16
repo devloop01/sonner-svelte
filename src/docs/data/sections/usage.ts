@@ -1,5 +1,3 @@
-export { default as Usage } from './usage.svelte';
-
 export const usageCode = `<script>
 import { toast, Toaster } from 'sonner-svelte';
 </script>

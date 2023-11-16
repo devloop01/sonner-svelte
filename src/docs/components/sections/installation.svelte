@@ -3,8 +3,8 @@
 	import { crossfade } from 'svelte/transition';
 	import { circOut } from 'svelte/easing';
 
-	import { CopyButton } from '@/components/copy-button';
-	import { Npm, Pnpm, Yarn } from '@/components/icons';
+	import CopyButton from '@/docs/components/copy-button.svelte';
+	import { Npm, Pnpm, Yarn } from '@/docs/components/icons';
 
 	let trigger: HTMLElement;
 	let copied = false;
