@@ -1,10 +1,17 @@
+@import './reset.postcss';
 @import './globals.postcss';
+
+html,
+body {
+	--side-padding: 16px;
+	font-family: var(--font-inter);
+}
 
 .container {
 	max-width: 642px;
 	margin: 0 auto;
-	padding-left: max(var(--side-padding, 16px), env(safe-area-inset-left));
-	padding-right: max(var(--side-padding, 16px), env(safe-area-inset-right));
+	padding-left: max(var(--side-padding), env(safe-area-inset-left));
+	padding-right: max(var(--side-padding), env(safe-area-inset-right));
 }
 
 .content {
