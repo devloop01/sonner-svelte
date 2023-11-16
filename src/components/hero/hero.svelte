@@ -19,7 +19,11 @@
 	<p>An opinionated toast component for svelte</p>
 
 	<div class="buttons">
-		<button data-primary class="button" on:click={() => toast.message('Hello from toast!')}>
+		<button
+			data-primary
+			class="button"
+			on:click={() => toast.message('Hello from toast!', { description: 'This is a description!' })}
+		>
 			<svelte:component this={Star} width="14" height="14" />
 			<span>Render Toast</span>
 		</button>

@@ -1,10 +1,9 @@
-import type { HeightT, Toast, ToastOptions } from './types';
+import type { HeightT, Toast } from './types';
 
 import { get, writable } from 'svelte/store';
 import { TIME_BEFORE_UNMOUNT, TOAST_LIMIT } from './constants';
 
-export function createToastsStore(toastOptions?: ToastOptions) {
-	toastOptions;
+export function createToastsStore() {
 	const toasts = writable<Toast[]>([]);
 	const pausedAt = writable<number | null>(null);
 	const toastTimeouts = new Map<Toast['id'], ReturnType<typeof setTimeout>>();
@@ -78,8 +77,9 @@ export function createToastsStore(toastOptions?: ToastOptions) {
 	};
 
 	return {
-		subscribe: toasts.subscribe,
+		toasts,
 		pausedAt: { subscribe: pausedAt.subscribe },
+		subscribe: toasts.subscribe,
 		add: upsert,
 		update,
 		remove,

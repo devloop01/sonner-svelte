@@ -59,20 +59,18 @@
 	import { portal } from '../actions/portal';
 	import Toast from './toast.svelte';
 
-	type $$Props = ToasterProps;
-
-	export let position: $$Props['position'] = 'bottom-right';
-	export let hotkey: $$Props['hotkey'] = ['altKey', 'KeyT'];
-	export let expand: $$Props['expand'] | undefined = undefined;
-	export let offset: $$Props['offset'] | undefined = undefined;
-	export let theme: $$Props['theme'] = 'light';
-	export let visibleToasts: $$Props['visibleToasts'] = VISIBLE_TOASTS_AMOUNT;
-	export let dir: $$Props['dir'] = getDocumentDirection();
-	export let richColors: $$Props['richColors'] | undefined = undefined;
-	export let invert: $$Props['invert'] | undefined = undefined;
-	export let duration: $$Props['duration'] = TOAST_LIFETIME;
-	export let closeButton: $$Props['closeButton'] = false;
-	export let gap: $$Props['gap'] = GAP;
+	export let position: ToasterProps['position'] = 'bottom-right';
+	export let hotkey: ToasterProps['hotkey'] = ['altKey', 'KeyT'];
+	export let expand: ToasterProps['expand'] | undefined = undefined;
+	export let offset: ToasterProps['offset'] | undefined = undefined;
+	export let theme: ToasterProps['theme'] = 'light';
+	export let visibleToasts: ToasterProps['visibleToasts'] = VISIBLE_TOASTS_AMOUNT;
+	export let dir: ToasterProps['dir'] = getDocumentDirection();
+	export let richColors: ToasterProps['richColors'] | undefined = undefined;
+	export let invert: ToasterProps['invert'] | undefined = undefined;
+	export let duration: ToasterProps['duration'] = TOAST_LIFETIME;
+	export let closeButton: ToasterProps['closeButton'] = false;
+	export let gap: ToasterProps['gap'] = GAP;
 
 	let listRef: HTMLOListElement;
 
@@ -115,42 +113,29 @@
 	}
 
 	$: {
-		// $toasts = [...$toasts];
-		// $toasts.map((toast) => {
-		// 	const indexOfExistingToast = $toasts.findIndex((t) => t.id === toast.id);
-		// 	if (indexOfExistingToast === -1) return [toast, ...$toasts];
-		// 	return [
-		// 		...$toasts.slice(0, indexOfExistingToast),
-		// 		{ ...$toasts[indexOfExistingToast], ...toast },
-		// 		...$toasts.slice(indexOfExistingToast + 1)
-		// 	];
-		// })[0];
+		if (expanded || interacting) toasts.startPause();
+		else toasts.endPause();
 	}
 
-	// ctx.set({
-	// 	toasts: $toasts,
-	// 	invert: !!invert,
-	// 	visibleToasts,
-	// 	closeButton,
-	// 	interacting,
-	// 	position,
-	// 	expandByDefault: !!expand,
-	// 	gap,
-	// 	expanded
-	// });
-
-	let timeouts = new Map<string, ReturnType<typeof setTimeout>>();
+	let timeouts = new Map<Toast['id'], ReturnType<typeof setTimeout>>();
 	$: ({ pausedAt } = toasts);
 
-	$: {
-		if ($pausedAt) {
-			for (const [, timeoutId] of timeouts) clearTimeout(timeoutId);
-			timeouts.clear();
-		} else {
+	const unsubscribers = [
+		toasts.pausedAt.subscribe(($pausedAt) => {
+			if ($pausedAt) {
+				for (const [, timeoutId] of timeouts) {
+					clearTimeout(timeoutId);
+				}
+				timeouts.clear();
+			}
+		}),
+
+		toasts.subscribe(($toasts) => {
+			if ($pausedAt) return;
+
 			const now = Date.now();
 			for (const t of $toasts) {
-				if (timeouts.has(t.id)) continue;
-				if (t.duration === Infinity) continue;
+				if (timeouts.has(t.id) || t.duration === Infinity) continue;
 
 				const durationLeft = (t.duration || 0) + t.pauseDuration - (now - t.createdAt);
 
@@ -159,15 +144,15 @@
 						// FIXME: This causes a recursive cycle of updates.
 						toasts.dismiss(t.id);
 					}
-				} else {
-					timeouts.set(
-						t.id,
-						setTimeout(() => toasts.dismiss(t.id), durationLeft)
-					);
+					return null;
 				}
+				timeouts.set(
+					t.id,
+					setTimeout(() => toasts.dismiss(t.id), durationLeft)
+				);
 			}
-		}
-	}
+		})
+	];
 
 	const handleKeyDown = (event: KeyboardEvent) => {
 		const isHotkeyPressed = hotkey.every((key) => (event as any)[key] || event.code === key);
@@ -208,6 +193,8 @@
 			lastFocusedElementRef = null;
 			isFocusWithinRef = false;
 		}
+
+		unsubscribers.forEach((unsub) => unsub());
 	});
 </script>
 
