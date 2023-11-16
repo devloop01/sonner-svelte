@@ -75,10 +75,5 @@
 	},
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
-	"type": "module",
-	"dependencies": {
-		"@radix-ui/colors": "^3.0.0",
-		"@unocss/reset": "^0.57.3",
-		"cva": "1.0.0-beta.1"
-	}
+	"type": "module"
 }
