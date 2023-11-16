@@ -1,5 +1,11 @@
 # sonner-svelte
 
+## 0.1.3
+
+### Patch Changes
+
+- fix: pause timer when interacting ([#7](https://github.com/devloop01/sonner-svelte/pull/7))
+
 ## 0.1.2
 
 ### Patch Changes
