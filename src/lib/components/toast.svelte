@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	import type { Toast, ToastPosition } from '../core/types';
+	import type { Toast, ToastPosition } from '../core/types.js';
 
 	interface ToastProps {
 		index: number;
@@ -19,9 +19,9 @@
 <script lang="ts">
 	import { SvelteComponent, onMount } from 'svelte';
 	// import { ctx } from '../core/ctx';
-	import { toasts, heights } from '../core/store';
-	import { SWIPE_THRESHOLD, TIME_BEFORE_UNMOUNT } from '../core/constants';
-	import { LoaderIcon, getIcon } from './icons';
+	import { toasts, heights } from '../core/store.js';
+	import { SWIPE_THRESHOLD, TIME_BEFORE_UNMOUNT } from '../core/constants.js';
+	import { LoaderIcon, getIcon } from './icons/index.js';
 
 	export let toast: ToastProps['toast'];
 	export let position: ToastProps['position'];

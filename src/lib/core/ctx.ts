@@ -1,4 +1,4 @@
-import type { ToasterContext } from './types';
+// import type { ToasterContext } from './types.js';
 
 import { getContext, setContext } from 'svelte';
 
