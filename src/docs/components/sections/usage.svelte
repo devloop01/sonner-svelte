@@ -1,7 +1,7 @@
 <script lang="ts">
-	import CodeBlock from '@/components/code-block/code-block.svelte';
+	import CodeBlock from '@/docs/components/code-block.svelte';
 
-	import { usageCode } from './index';
+	import { usageCode } from '@/docs/data/sections/usage';
 </script>
 
 <section>

@@ -1,5 +1,3 @@
-export { default as Other } from './other.svelte';
-
 interface Type {
 	name: string;
 	snippet: string;

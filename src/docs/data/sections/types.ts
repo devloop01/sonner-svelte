@@ -1,5 +1,3 @@
-export { default as Types } from './types.svelte';
-
 import { toast } from '@/lib';
 
 interface Type {

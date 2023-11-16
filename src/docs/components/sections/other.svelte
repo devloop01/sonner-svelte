@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { CodeBlock } from '@/components/code-block';
+	import CodeBlock from '@/docs/components/code-block.svelte';
 
-	import { allOtherTypes, getSnippet } from './index';
+	import { allOtherTypes, getSnippet } from '@/docs/data/sections/other';
 
 	let activeType = allOtherTypes[0];
 

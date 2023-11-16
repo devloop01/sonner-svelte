@@ -1,7 +1,7 @@
-import type { Toast } from './types';
+import type { Toast } from './types.js';
 import { onDestroy } from 'svelte';
-import { toasts } from './store';
-import { toast } from './toast';
+import { toasts } from './store.js';
+import { toast } from './toast.js';
 
 export default function useToaster() {
 	const timeouts = new Map<Toast['id'], ReturnType<typeof setTimeout>>();

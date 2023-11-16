@@ -1,4 +1,4 @@
-import type { ValueFunction, ValueOrFunction } from './types';
+import type { ValueFunction, ValueOrFunction } from './types.js';
 
 export const genId = (() => {
 	let count = 0;

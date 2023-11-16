@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	import type { ToastOptions, ToastPosition, WithTarget } from '../core/types';
+	import type { ToastOptions, ToastPosition, WithTarget } from '../core/types.js';
 
 	interface ToasterProps {
 		hotkey: string[];
@@ -53,10 +53,10 @@
 		GAP,
 		VISIBLE_TOASTS_AMOUNT,
 		TOAST_LIFETIME
-	} from '../core/constants';
-	import { ctx } from '../core/ctx';
-	import { toasts, heights } from '../core/store';
-	import { portal } from '../actions/portal';
+	} from '../core/constants.js';
+	import { ctx } from '../core/ctx.js';
+	import { toasts, heights } from '../core/store.js';
+	import { portal } from '../actions/portal.js';
 	import Toast from './toast.svelte';
 
 	export let position: ToasterProps['position'] = 'bottom-right';

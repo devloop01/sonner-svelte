@@ -1,4 +1,4 @@
-import type { ToastType } from '../../core/types';
+import type { ToastType } from '../../core/types.js';
 
 import ErrorIcon from './error.svelte';
 import InfoIcon from './info.svelte';

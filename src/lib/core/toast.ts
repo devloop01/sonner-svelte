@@ -1,7 +1,13 @@
-import type { DefaultToastOptions, Renderable, Toast, ToastType, ValueOrFunction } from './types';
+import type {
+	DefaultToastOptions,
+	Renderable,
+	Toast,
+	ToastType,
+	ValueOrFunction
+} from './types.js';
 import { toasts } from './store';
-import { genId, resolveValue } from './utils';
-import { TOAST_LIFETIME } from './constants';
+import { genId, resolveValue } from './utils.js';
+import { TOAST_LIFETIME } from './constants.js';
 
 type Message = Renderable;
 

@@ -1,7 +1,7 @@
-import type { HeightT, Toast } from './types';
+import type { HeightT, Toast } from './types.js';
 
 import { get, writable } from 'svelte/store';
-import { TIME_BEFORE_UNMOUNT, TOAST_LIMIT } from './constants';
+import { TIME_BEFORE_UNMOUNT, TOAST_LIMIT } from './constants.js';
 
 export function createToastsStore() {
 	const toasts = writable<Toast[]>([]);
