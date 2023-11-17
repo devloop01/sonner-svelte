@@ -10,6 +10,11 @@
 	} from '@/docs/components/sections';
 
 	import { Toaster } from '@/lib';
+
+	let expand = false;
+	let position = 'bottom-right' as const;
+	let richColors = false;
+	let closeButton = false;
 </script>
 
 <div class="container">
@@ -18,14 +23,14 @@
 		<Installation />
 		<Usage />
 		<Types />
-		<Position position="bottom-right" />
-		<ExpandModes expand />
-		<Other />
+		<Position bind:position />
+		<ExpandModes bind:expand />
+		<Other bind:richColors bind:closeButton />
 	</main>
 	<SiteFooter />
 </div>
 
-<Toaster />
+<Toaster theme="light" {richColors} {closeButton} {expand} {position} />
 
 <style>
 	.container {

@@ -3,9 +3,28 @@
 
 	import { allOtherTypes, getSnippet } from '@/docs/data/sections/other';
 
+	export let richColors = false;
+	export let closeButton = false;
+
 	let activeType = allOtherTypes[0];
 
 	$: snippet = getSnippet(activeType);
+
+	function handleClick(currentType: typeof activeType) {
+		activeType = currentType;
+		const richColorsActive = currentType?.name?.includes('Rich');
+		const closeButtonActive = currentType?.name?.includes('Close');
+		if (richColorsActive) {
+			richColors = true;
+			closeButton = false;
+		} else if (closeButtonActive) {
+			richColors = false;
+			closeButton = !closeButton;
+		} else {
+			richColors = false;
+			closeButton = false;
+		}
+	}
 </script>
 
 <section>
@@ -16,7 +35,7 @@
 			<button
 				class="button"
 				data-active={type.name === activeType.name || undefined}
-				on:click={() => (activeType = type)}
+				on:click={() => handleClick(type)}
 			>
 				{type.name}
 			</button>
