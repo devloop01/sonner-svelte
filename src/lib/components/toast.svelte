@@ -17,7 +17,7 @@
 </script>
 
 <script lang="ts">
-	import { onDestroy, onMount } from 'svelte';
+	import { onMount } from 'svelte';
 	import { toasts, heights, addToastToRemoveQueue, dismissToast } from '../core/store.js';
 	import { SWIPE_THRESHOLD } from '../core/constants.js';
 	import { LoaderIcon, getIcon } from './icons/index.js';
@@ -92,10 +92,10 @@
 				: setTimeout(() => {
 						dismissToast(toast.id);
 				  }, toast.closeDelay);
-	});
 
-	onDestroy(() => {
-		toast.timeout && clearTimeout(toast.timeout);
+		return () => {
+			toast.timeout && clearTimeout(toast.timeout);
+		};
 	});
 
 	$: toast.delete && deleteToast();
