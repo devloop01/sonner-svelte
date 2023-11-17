@@ -67,4 +67,12 @@ export interface HeightT {
 	toastId: number | string;
 }
 
+export enum SwipeStateTypes {
+	SwipedOut = 'SwipedOut',
+	SwipedBack = 'SwipedBack',
+	NotSwiped = 'NotSwiped'
+}
+
+export type Theme = 'light' | 'dark';
+
 export type WithTarget<Event, Target> = Event & { currentTarget: Target };
