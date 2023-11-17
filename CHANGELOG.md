@@ -1,5 +1,11 @@
 # sonner-svelte
 
+## 0.1.5
+
+### Patch Changes
+
+- chore: refactor timeout logic on interaction ([#11](https://github.com/devloop01/sonner-svelte/pull/11))
+
 ## 0.1.4
 
 ### Patch Changes
