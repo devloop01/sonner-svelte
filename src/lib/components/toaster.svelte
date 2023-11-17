@@ -54,8 +54,7 @@
 		VISIBLE_TOASTS_AMOUNT,
 		TOAST_LIFETIME
 	} from '../core/constants.js';
-	import { ctx } from '../core/ctx.js';
-	import { toasts, heights } from '../core/store.js';
+	import { toasts, heights, dismissToast } from '../core/store.js';
 	import { portal } from '../actions/portal.js';
 	import Toast from './toast.svelte';
 
@@ -72,7 +71,7 @@
 	export let closeButton: ToasterProps['closeButton'] = false;
 	export let gap: ToasterProps['gap'] = GAP;
 
-	let listRef: HTMLOListElement;
+	let listRef: HTMLOListElement | null;
 
 	let expanded = false;
 	let interacting = false;
@@ -113,58 +112,65 @@
 	}
 
 	$: {
-		if (expanded || interacting) toasts.startPause();
-		else toasts.endPause();
+		if (expanded || interacting) startPause();
+		else endPause();
 	}
 
-	let timeouts = new Map<Toast['id'], ReturnType<typeof setTimeout>>();
-	$: ({ pausedAt } = toasts);
+	onDestroy(() => {
+		if (listRef && lastFocusedElementRef) {
+			lastFocusedElementRef.focus({ preventScroll: true });
+			lastFocusedElementRef = null;
+			isFocusWithinRef = false;
+		}
+	});
 
-	const unsubscribers = [
-		toasts.pausedAt.subscribe(($pausedAt) => {
-			if ($pausedAt) {
-				for (const [, timeoutId] of timeouts) {
-					clearTimeout(timeoutId);
-				}
-				timeouts.clear();
-			}
-		}),
-
-		toasts.subscribe(($toasts) => {
-			if ($pausedAt) return;
-
-			const now = Date.now();
-			for (const t of $toasts) {
-				if (timeouts.has(t.id) || t.duration === Infinity) continue;
-
-				const durationLeft = (t.duration || 0) + t.pauseDuration - (now - t.createdAt);
-
-				if (durationLeft < 0) {
-					if (!t.delete) {
-						// FIXME: This causes a recursive cycle of updates.
-						toasts.dismiss(t.id);
+	const startPause = () => {
+		toasts.update(($toasts) => {
+			return $toasts.map((toast) => {
+				if (toast.closeDelay !== Infinity || toast.closeDelay !== 0) {
+					if (toast.timeout !== null) {
+						clearTimeout(toast.timeout);
 					}
-					return null;
+					toast.pausedAt = Date.now();
 				}
-				timeouts.set(
-					t.id,
-					setTimeout(() => toasts.dismiss(t.id), durationLeft)
-				);
-			}
-		})
-	];
+
+				return toast;
+			});
+		});
+	};
+
+	const endPause = () => {
+		toasts.update(($toasts) => {
+			return $toasts.map((toast) => {
+				if (toast.closeDelay !== Infinity || toast.closeDelay !== 0) {
+					const pausedAt = toast.pausedAt ?? toast.createdAt;
+					const elapsed = pausedAt - toast.createdAt - toast.pauseDuration;
+					const remaining = toast.closeDelay - elapsed;
+
+					toast.timeout = setTimeout(() => {
+						dismissToast(toast.id);
+					}, remaining);
+
+					toast.pauseDuration += Date.now() - pausedAt;
+					toast.pausedAt = undefined;
+				}
+
+				return toast;
+			});
+		});
+	};
 
 	const handleKeyDown = (event: KeyboardEvent) => {
 		const isHotkeyPressed = hotkey.every((key) => (event as any)[key] || event.code === key);
 
 		if (isHotkeyPressed) {
 			expanded = true;
-			listRef.focus();
+			listRef?.focus();
 		}
 
 		if (
 			event.code === 'Escape' &&
-			(document.activeElement === listRef || listRef.contains(document.activeElement))
+			(document.activeElement === listRef || listRef?.contains(document.activeElement))
 		) {
 			expanded = false;
 		}
@@ -186,16 +192,6 @@
 			lastFocusedElementRef = event.relatedTarget as HTMLElement;
 		}
 	};
-
-	onDestroy(() => {
-		if (listRef && lastFocusedElementRef) {
-			lastFocusedElementRef.focus({ preventScroll: true });
-			lastFocusedElementRef = null;
-			isFocusWithinRef = false;
-		}
-
-		unsubscribers.forEach((unsub) => unsub());
-	});
 </script>
 
 <svelte:document on:keydown={handleKeyDown} />

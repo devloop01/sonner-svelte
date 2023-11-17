@@ -5,7 +5,7 @@ import type {
 	ToastType,
 	ValueOrFunction
 } from './types.js';
-import { toasts } from './store';
+import { dismissToast, upsertToast, removeToast } from './store';
 import { genId, resolveValue } from './utils.js';
 import { TOAST_LIFETIME } from './constants.js';
 
@@ -20,14 +20,16 @@ const createToast = (message: Message, type?: ToastType, opts?: DefaultToastOpti
 	dismissible: opts?.dismissible || true,
 	id: opts?.id || genId(),
 	createdAt: Date.now(),
-	pauseDuration: TOAST_LIFETIME
+	pauseDuration: 0,
+	timeout: null,
+	closeDelay: TOAST_LIFETIME
 });
 
 const createHandler =
 	(type?: ToastType): ToastHandler =>
 	(message, options) => {
 		const toast = createToast(message, type, options);
-		toasts.add(toast);
+		upsertToast(toast);
 		return toast.id;
 	};
 
@@ -43,10 +45,10 @@ toast.loading = createHandler('loading');
 toast.custom = createHandler();
 
 toast.dismiss = (toastId?: string) => {
-	toasts.dismiss(toastId);
+	dismissToast(toastId);
 };
 
-toast.remove = (toastId?: string) => toasts.remove(toastId);
+toast.remove = (toastId?: string) => removeToast(toastId);
 
 toast.promise = <T>(
 	promise: Promise<T>,
