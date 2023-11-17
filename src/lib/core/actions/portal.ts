@@ -3,6 +3,7 @@
 
 import { tick } from 'svelte';
 import type { Action } from 'svelte/action';
+import { isHTMLElement, noop } from '../utils.js';
 
 export type PortalConfig = undefined | string | HTMLElement;
 
@@ -48,9 +49,3 @@ export const portal: Action<HTMLElement, PortalConfig> = (el, target = 'body') =
 
 	return { update, destroy };
 };
-
-function isHTMLElement(element: unknown): element is HTMLElement {
-	return element instanceof HTMLElement;
-}
-
-function noop() {}

@@ -5,7 +5,7 @@ import type {
 	ToastType,
 	ValueOrFunction
 } from './types.js';
-import { dismissToast, upsertToast, removeToast } from './store';
+import { dismissToast, upsertToast, removeToast } from './store.js';
 import { genId, resolveValue } from './utils.js';
 import { TOAST_LIFETIME } from './constants.js';
 

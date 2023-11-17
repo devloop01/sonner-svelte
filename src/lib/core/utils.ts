@@ -9,7 +9,7 @@ export const genId = (() => {
 	};
 })();
 
-const isFunction = <TValue, TArg>(
+export const isFunction = <TValue, TArg>(
 	valOrFunction: ValueOrFunction<TValue, TArg>
 ): valOrFunction is ValueFunction<TValue, TArg> => typeof valOrFunction === 'function';
 
@@ -17,3 +17,7 @@ export const resolveValue = <TValue, TArg>(
 	valOrFunction: ValueOrFunction<TValue, TArg>,
 	arg: TArg
 ): TValue => (isFunction(valOrFunction) ? valOrFunction(arg) : valOrFunction);
+
+export const isHTMLElement = (el: unknown): el is HTMLElement => el instanceof HTMLElement;
+
+export const noop = () => {};

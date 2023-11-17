@@ -1,4 +1,4 @@
-import type { SvelteComponent } from 'svelte';
+import type { ComponentType } from 'svelte';
 
 export type ToastType = 'normal' | 'action' | 'success' | 'info' | 'warning' | 'error' | 'loading';
 
@@ -14,7 +14,7 @@ export type ToastPosition =
 	| 'bottom-start'
 	| 'bottom-end';
 
-export type Renderable = typeof SvelteComponent | string;
+export type Renderable = ComponentType | string;
 
 export type ValueFunction<TValue, TArg> = (arg: TArg) => TValue;
 export type ValueOrFunction<TValue, TArg> = TValue | ValueFunction<TValue, TArg>;
@@ -25,7 +25,7 @@ export interface Toast {
 	title: Renderable;
 	description?: Renderable;
 	createdAt: number;
-	icon?: typeof SvelteComponent;
+	icon?: ComponentType;
 	duration?: number;
 	position?: ToastPosition;
 	invert?: boolean;
