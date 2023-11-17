@@ -17,10 +17,9 @@
 </script>
 
 <script lang="ts">
-	import { SvelteComponent, onMount } from 'svelte';
-	// import { ctx } from '../core/ctx';
-	import { toasts, heights } from '../core/store.js';
-	import { SWIPE_THRESHOLD, TIME_BEFORE_UNMOUNT } from '../core/constants.js';
+	import { onDestroy, onMount } from 'svelte';
+	import { toasts, heights, addToastToRemoveQueue, dismissToast } from '../core/store.js';
+	import { SWIPE_THRESHOLD } from '../core/constants.js';
 	import { LoaderIcon, getIcon } from './icons/index.js';
 
 	export let toast: ToastProps['toast'];
@@ -36,13 +35,15 @@
 	export let closeButton: ToastProps['closeButton'];
 	export let interacting: ToastProps['interacting'];
 
-	let toastRef: HTMLLIElement;
+	let toastRef: HTMLLIElement | null;
+
 	let mounted = false;
 	let removed = false;
 	let swiping = false;
 	let swipeOut = false;
 
 	$: toastType = toast.type;
+	$: styled = !toast.unstyled;
 	$: dismissible = toast.dismissible !== false;
 	$: invert = toast.invert || toastInvert;
 	$: disabled = toast.type === 'loading';
@@ -67,6 +68,7 @@
 	onMount(() => {
 		mounted = true;
 
+		if (!toastRef) return;
 		const originalHeight = toastRef.style.height;
 		toastRef.style.height = 'auto';
 		const height = toastRef.getBoundingClientRect().height;
@@ -83,6 +85,17 @@
 				return heights.map((h) => (h.toastId === toastId ? { ...h, height } : h));
 			}
 		});
+
+		toast.timeout =
+			toast.closeDelay === 0
+				? null
+				: setTimeout(() => {
+						dismissToast(toast.id);
+				  }, toast.closeDelay);
+	});
+
+	onDestroy(() => {
+		toast.timeout && clearTimeout(toast.timeout);
 	});
 
 	$: toast.delete && deleteToast();
@@ -92,7 +105,7 @@
 		removed = true;
 		offsetBeforeRemove = offset;
 		heights.update((heights) => heights.filter((h) => h.toastId !== toast.id));
-		toasts.addToRemoveQueue(toast.id);
+		addToastToRemoveQueue(toast.id);
 	};
 
 	const handlePointerDown = (event: PointerEvent) => {
@@ -106,8 +119,8 @@
 		pointerStart = { x: event.clientX, y: event.clientY };
 	};
 
-	const handlePointerUp = (event: PointerEvent) => {
-		if (swipeOut || !dismissible) return;
+	const handlePointerUp = () => {
+		if (!toastRef || swipeOut || !dismissible) return;
 
 		pointerStart = null;
 		const swipeAmount = +toastRef.style.getPropertyValue('--swipe-amount').replace('px', '') || 0;
@@ -128,7 +141,7 @@
 	};
 
 	const handlePointerMove = (event: PointerEvent) => {
-		if (!pointerStart || !dismissible) return;
+		if (!toastRef || !pointerStart || !dismissible) return;
 
 		const yPosition = event.clientY - pointerStart.y;
 		const xPosition = event.clientX - pointerStart.x;
@@ -157,7 +170,7 @@
 	role="status"
 	class=""
 	data-sonner-sv-toast
-	data-styled={!toast.unstyled}
+	data-styled={styled}
 	data-mounted={mounted}
 	data-promise={toast.promise}
 	data-removed={removed}
@@ -220,10 +233,7 @@
 			{#if (toast.promise || toast.type === 'loading') && !toast.icon}
 				<LoaderIcon visible={toastType === 'loading'} />
 			{/if}
-			{#if toast.icon}
-				<!-- <svelte:component this={toast.icon} /> -->
-			{/if}
-			<svelte:component this={getIcon(toastType)} />
+			<svelte:component this={toast.icon ?? getIcon(toastType)} />
 		</div>
 	{/if}
 
