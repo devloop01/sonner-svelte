@@ -2,7 +2,7 @@
 	import { scale } from 'svelte/transition';
 	import { copy } from '@svelte-put/copy';
 
-	import { Check, Copy } from '@/docs/components/icons';
+	import { Check, Copy } from '@/components/icons';
 
 	export let text: string;
 	export let copied = false;
