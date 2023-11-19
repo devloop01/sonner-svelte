@@ -13,7 +13,7 @@
 		},
 		{
 			name: 'Default',
-			snippet: `<Toaster expand={true} />`,
+			snippet: `<Toaster expand={false} />`,
 			action: () => {
 				expand = false;
 			}
