@@ -1,9 +1,7 @@
 <script lang="ts">
-	import CodeBlock from '@/components/code-block.svelte';
+	import { CodeExample } from '@/components';
 
-	import { allTypes } from './index.js';
-
-	let activeType = allTypes[0];
+	import { examples } from './index.js';
 </script>
 
 <section>
@@ -13,22 +11,5 @@
 		argument.
 	</p>
 
-	<div class="buttons">
-		{#each allTypes as type (type.name)}
-			<button
-				class="button"
-				data-active={type.name === activeType.name || undefined}
-				on:click={() => {
-					activeType = type;
-					type.action?.();
-				}}
-			>
-				{type.name}
-			</button>
-		{/each}
-	</div>
-
-	{#key activeType.name}
-		<CodeBlock code={activeType.snippet} language="js" />
-	{/key}
+	<CodeExample {examples} language="js" />
 </section>

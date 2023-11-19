@@ -1,5 +1,5 @@
 <script lang="ts">
-	import CodeBlock from '@/components/code-block.svelte';
+	import { CodeBlock } from '@/components';
 
 	import { usageCode } from './index.js';
 </script>

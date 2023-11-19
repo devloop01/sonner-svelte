@@ -1,17 +1,17 @@
 <script lang="ts">
-	import CodeBlock from '@/components/code-block.svelte';
+	import { CodeExample } from '@/components';
 	import { toast } from '$lib';
 
 	export let richColors = false;
 	export let closeButton = false;
 
-	interface Type {
+	interface Example {
 		name: string;
 		snippet: string;
 		action?: () => void;
 	}
 
-	const getSnippet = (activeType: Type) => {
+	const getSnippet = (activeType: Example) => {
 		const isRichColorsActive = activeType.name.includes('Rich');
 		const isCloseButtonActive = activeType.name.includes('Close');
 
@@ -23,7 +23,7 @@
 `;
 	};
 
-	const allOtherTypes: Type[] = [
+	const examples: Example[] = [
 		{
 			name: 'Rich Colors Success',
 			snippet: `toast.success('Event has been created')`,
@@ -95,30 +95,10 @@ description: 'Monday, January 3rd at 6:00pm',
 			//   },
 		}
 	];
-
-	let activeType = allOtherTypes[0];
-	$: snippet = getSnippet(activeType);
 </script>
 
 <section>
 	<h3>Other</h3>
 
-	<div class="buttons">
-		{#each allOtherTypes as type (type.name)}
-			<button
-				class="button"
-				data-active={type.name === activeType.name || undefined}
-				on:click={() => {
-					activeType = type;
-					type.action?.();
-				}}
-			>
-				{type.name}
-			</button>
-		{/each}
-	</div>
-
-	{#key activeType.name}
-		<CodeBlock code={snippet} language="js" />
-	{/key}
+	<CodeExample {examples} language="js" />
 </section>

@@ -1,9 +1,24 @@
 <script lang="ts">
-	import CodeBlock from '@/components/code-block.svelte';
+	import { CodeExample } from '@/components';
 
 	export let expand: boolean;
 
-	$: snippet = `<Toaster expand={${expand}} />`;
+	let examples = [
+		{
+			name: 'Expand',
+			snippet: `<Toaster expand={true} />`,
+			action: () => {
+				expand = true;
+			}
+		},
+		{
+			name: 'Default',
+			snippet: `<Toaster expand={true} />`,
+			action: () => {
+				expand = false;
+			}
+		}
+	];
 </script>
 
 <section>
@@ -12,16 +27,5 @@
 		You can change the amount of toasts visible through the <code>visibleToasts</code> prop.
 	</p>
 
-	<div class="buttons">
-		<button class="button" data-active={expand || undefined} on:click={() => (expand = true)}>
-			Expand
-		</button>
-		<button class="button" data-active={!expand || undefined} on:click={() => (expand = false)}>
-			Default
-		</button>
-	</div>
-
-	{#key expand}
-		<CodeBlock code={snippet} />
-	{/key}
+	<CodeExample {examples} />
 </section>

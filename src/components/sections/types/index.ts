@@ -2,14 +2,14 @@ export { default as Types } from './types.svelte';
 
 import { toast } from '$lib';
 
-interface Type {
+interface Example {
 	name: string;
 	snippet: string;
 	action?: () => void;
 }
 
 const promiseCode = '`${data.name} toast has been added`';
-export const allTypes: Type[] = [
+export const examples: Example[] = [
 	{
 		name: 'Default',
 		snippet: `toast('Event has been created')`,
