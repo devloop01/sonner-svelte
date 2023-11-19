@@ -20,7 +20,7 @@
 				data-active={type.name === activeType.name || undefined}
 				on:click={() => {
 					activeType = type;
-					activeType.action?.();
+					type.action?.();
 				}}
 			>
 				{type.name}
