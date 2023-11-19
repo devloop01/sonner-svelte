@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { CodeExample } from '@/components';
+  import { toast } from '$lib'
 
 	export let expand: boolean;
 
@@ -9,6 +10,9 @@
 			snippet: `<Toaster expand={true} />`,
 			action: () => {
 				expand = true;
+			  toast('Event has been created', {
+				  description: 'Monday, January 3rd at 6:00pm'
+			  });
 			}
 		},
 		{
@@ -16,6 +20,9 @@
 			snippet: `<Toaster expand={false} />`,
 			action: () => {
 				expand = false;
+			  toast('Event has been created', {
+				  description: 'Monday, January 3rd at 6:00pm'
+			  });
 			}
 		}
 	];
