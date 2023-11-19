@@ -1,7 +1,7 @@
 <script>
-	import { Star, Logo } from '@/docs/components/icons';
+	import { Star, Logo } from '@/components/icons';
 
-	import { toast } from '@/lib';
+	import { toast } from '$lib';
 </script>
 
 <div class="wrapper">

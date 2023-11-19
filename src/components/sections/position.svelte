@@ -1,5 +1,5 @@
 <script lang="ts">
-	import CodeBlock from '@/docs/components/code-block.svelte';
+	import CodeBlock from '@/components/code-block.svelte';
 
 	const positions = [
 		'top-left',

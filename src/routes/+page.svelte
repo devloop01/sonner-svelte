@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { SiteHero, SiteFooter } from '@/docs/components';
+	import { SiteHero, SiteFooter } from '@/components';
 	import {
 		Installation,
 		Usage,
@@ -7,9 +7,9 @@
 		Position,
 		Expand as ExpandModes,
 		Other
-	} from '@/docs/components/sections';
+	} from '@/components/sections';
 
-	import { Toaster } from '@/lib';
+	import { Toaster } from '$lib';
 
 	let expand = false;
 	let position = 'bottom-right' as const;

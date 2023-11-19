@@ -1,7 +1,7 @@
 <script lang="ts">
-	import CodeBlock from '@/docs/components/code-block.svelte';
+	import CodeBlock from '@/components/code-block.svelte';
 
-	import { allTypes } from '@/docs/data/sections/types';
+	import { allTypes } from './index.js';
 
 	let activeType = allTypes[0];
 </script>
@@ -20,7 +20,7 @@
 				data-active={type.name === activeType.name || undefined}
 				on:click={() => {
 					activeType = type;
-					activeType.action?.();
+					type.action?.();
 				}}
 			>
 				{type.name}
