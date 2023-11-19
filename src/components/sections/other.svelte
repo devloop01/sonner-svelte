@@ -19,11 +19,11 @@
 
 // ...
 
-<Toaster ${isRichColorsActive ? 'richColors ' : ''} ${isCloseButtonActive ? 'closeButton ' : ''}/>
+<Toaster ${isRichColorsActive ? 'richColors ' : ''} ${isCloseButtonActive ? `closeButton ` : ''}/>
 `;
 	};
 
-	const examples: Example[] = [
+	let examples: Example[] = [
 		{
 			name: 'Rich Colors Success',
 			snippet: `toast.success('Event has been created')`,
@@ -95,6 +95,11 @@ description: 'Monday, January 3rd at 6:00pm',
 			//   },
 		}
 	];
+
+	examples = examples.map((example) => ({
+		...example,
+		snippet: getSnippet(example)
+	}));
 </script>
 
 <section>
