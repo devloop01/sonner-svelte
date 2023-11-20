@@ -18,14 +18,11 @@
 ## Installation
 
 ```bash
+# npm
 npm install sonner-svelte
-```
-
-```bash
+# pnpm
 pnpm add sonner-svelte
-```
-
-```bash
+# yarn
 yarn add sonner-svelte
 ```
 
