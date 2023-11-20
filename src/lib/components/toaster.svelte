@@ -15,6 +15,7 @@
 		gap: number;
 		closeButton: boolean;
 		toastOptions: ToastOptions;
+		portal: HTMLElement | string | null;
 		// className: string;
 		// style: string;
 		// loadingIcon: Renderable;
@@ -24,10 +25,10 @@
 		return theme !== 'system'
 			? theme
 			: typeof window !== 'undefined'
-			? window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-				? 'dark'
-				: 'light'
-			: 'light';
+			  ? window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+					? 'dark'
+					: 'light'
+			  : 'light';
 	}
 
 	function getDocumentDirection(): ToasterProps['dir'] {
@@ -70,6 +71,8 @@
 	export let duration: ToasterProps['duration'] = TOAST_LIFETIME;
 	export let closeButton: ToasterProps['closeButton'] = false;
 	export let gap: ToasterProps['gap'] = GAP;
+	export let portalElement: ToasterProps['portal'] | undefined = undefined;
+	export { portalElement as portal };
 
 	let listRef: HTMLOListElement | null;
 
@@ -197,7 +200,11 @@
 <svelte:document on:keydown={handleKeyDown} />
 
 {#if $toasts.length}
-	<section aria-label={`Notifications ${hotkeyLabel}`} tabIndex={-1} use:portal>
+	<section
+		aria-label={`Notifications ${hotkeyLabel}`}
+		tabIndex={-1}
+		use:portal={{ target: portalElement }}
+	>
 		{#each possiblePositions as position, index (position)}
 			{@const [y, x] = position.split('-')}
 			{@const filteredToasts = $toasts.filter(

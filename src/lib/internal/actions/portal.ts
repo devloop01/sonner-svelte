@@ -5,16 +5,24 @@ import { tick } from 'svelte';
 import type { Action } from 'svelte/action';
 import { isHTMLElement, noop } from '../utils.js';
 
-export type PortalConfig = undefined | string | HTMLElement;
+export type PortalConfig = { target?: string | HTMLElement | null };
 
-export const portal: Action<HTMLElement, PortalConfig> = (el, target = 'body') => {
+type Parameter = undefined | PortalConfig;
+
+export const portal: Action<HTMLElement, Parameter> = (el, options) => {
+	let { target } = resolveOptions(options);
 	let targetEl;
 
 	if (!isHTMLElement(target) && typeof target !== 'string') {
 		return { destroy: noop };
 	}
 
-	async function update(newTarget: HTMLElement | string | undefined) {
+	const update = async (newOptions: Parameter) => {
+		const newTarget = resolveOptions(newOptions).target;
+
+		// do not portal if null
+		if (newTarget === null) return;
+
 		target = newTarget;
 
 		if (typeof target === 'string') {
@@ -39,13 +47,16 @@ export const portal: Action<HTMLElement, PortalConfig> = (el, target = 'body') =
 		el.dataset.portal = '';
 		targetEl.appendChild(el);
 		el.hidden = false;
-	}
+	};
 
-	function destroy() {
-		el.remove();
-	}
+	const destroy = () => el.remove();
 
-	update(target);
+	update({ target });
 
 	return { update, destroy };
+};
+
+export const resolveOptions = (options?: PortalConfig) => {
+	if (!options || typeof options.target === 'undefined') return { target: 'body' };
+	return { target: options.target };
 };
