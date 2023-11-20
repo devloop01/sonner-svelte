@@ -1,5 +1,11 @@
 # sonner-svelte
 
+## 0.1.7
+
+### Patch Changes
+
+- feat: add `portal` option ([`eee94ca`](https://github.com/devloop01/sonner-svelte/commit/eee94ca0ef85103d1c69c76d002b7e46d60a81f7))
+
 ## 0.1.6
 
 ### Patch Changes
