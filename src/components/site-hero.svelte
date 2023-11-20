@@ -1,4 +1,5 @@
 <script>
+	import { page } from '$app/stores';
 	import { Star, Logo } from '@/components/icons';
 
 	import { toast } from '$lib';
@@ -33,6 +34,8 @@
 	<p>
 		ported from <a class="link" href="https://sonner.emilkowal.ski/" target="_blank">sonner</a>
 	</p>
+
+	<span class="version-badge">version {$page.data.version}</span>
 </div>
 
 <style lang="postcss">
@@ -167,10 +170,23 @@
 	}
 
 	.heading {
-		margin: -20px 0 14px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin: -12px 0 20px;
 		& > svg {
 			height: 62px;
 		}
+	}
+
+	.version-badge {
+		color: var(--gray11);
+		font-weight: 500;
+		font-size: 14px;
+		border: 1px solid var(--gray5);
+		border-radius: 20px;
+		padding: 2px 8px;
+		margin-top: 8px;
 	}
 
 	@media (max-width: 420px) {
