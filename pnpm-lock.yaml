@@ -29,9 +29,6 @@ devDependencies:
   '@svitejs/changesets-changelog-github-compact':
     specifier: ^1.1.0
     version: 1.1.0
-  '@types/prismjs':
-    specifier: ^1.26.3
-    version: 1.26.3
   '@typescript-eslint/eslint-plugin':
     specifier: ^6.11.0
     version: 6.11.0(@typescript-eslint/parser@6.11.0)(eslint@8.54.0)(typescript@5.2.2)
@@ -50,6 +47,9 @@ devDependencies:
   eslint-plugin-svelte:
     specifier: ^2.35.0
     version: 2.35.0(eslint@8.54.0)(svelte@4.2.5)
+  highlight.js:
+    specifier: ^11.9.0
+    version: 11.9.0
   postcss:
     specifier: ^8.4.31
     version: 8.4.31
@@ -62,12 +62,6 @@ devDependencies:
   prettier-plugin-svelte:
     specifier: ^3.1.0
     version: 3.1.0(prettier@3.1.0)(svelte@4.2.5)
-  prism-svelte:
-    specifier: ^0.5.0
-    version: 0.5.0
-  prismjs:
-    specifier: ^1.29.0
-    version: 1.29.0
   publint:
     specifier: ^0.2.5
     version: 0.2.5
@@ -77,6 +71,9 @@ devDependencies:
   svelte-check:
     specifier: ^3.6.0
     version: 3.6.0(postcss@8.4.31)(svelte@4.2.5)
+  svelte-highlight:
+    specifier: ^7.4.1
+    version: 7.4.1
   svelte-writable-derived:
     specifier: ^3.1.0
     version: 3.1.0(svelte@4.2.5)
@@ -1249,10 +1246,6 @@ packages:
 
   /@types/normalize-package-data@2.4.3:
     resolution: {integrity: sha512-ehPtgRgaULsFG8x0NeYJvmyH1hmlfsNLujHe9dQEia/7MAJYdzMSi19JtchUHjmBA6XC/75dK55mzZH+RyieSg==}
-    dev: true
-
-  /@types/prismjs@1.26.3:
-    resolution: {integrity: sha512-A0D0aTXvjlqJ5ZILMz3rNfDBOx9hHxLZYv2by47Sm/pqW35zzjusrZTryatjN/Rf8Us2gZrJD+KeHbUSTux1Cw==}
     dev: true
 
   /@types/pug@2.0.9:
@@ -2747,6 +2740,11 @@ packages:
       function-bind: 1.1.2
     dev: true
 
+  /highlight.js@11.9.0:
+    resolution: {integrity: sha512-fJ7cW7fQGCYAkgv4CPfwFHrfd/cLS4Hau96JuJ+ZTOWhjnhoeN1ub1tFmALm/+lW5z4WCAuAV9bm05AP0mS6Gw==}
+    engines: {node: '>=12.0.0'}
+    dev: true
+
   /hosted-git-info@2.8.9:
     resolution: {integrity: sha512-mxIDAb9Lsm6DoOJ7xH+5+X4y1LU/4Hi50L9C5sIswK3JzULS4bwk1FvjdBgvYR4bzT4tuUQiC15FE2f5HbLvYw==}
     dev: true
@@ -4039,15 +4037,6 @@ packages:
       react-is: 18.2.0
     dev: true
 
-  /prism-svelte@0.5.0:
-    resolution: {integrity: sha512-db91Bf3pRGKDPz1lAqLFSJXeW13mulUJxhycysFpfXV5MIK7RgWWK2E5aPAa71s8TCzQUXxF5JOV42/iOs6QkA==}
-    dev: true
-
-  /prismjs@1.29.0:
-    resolution: {integrity: sha512-Kx/1w86q/epKcmte75LNrEoT+lX8pBpavuAbvJWRXar7Hz8jrtF+e3vY751p0R8H9HdArwaCTNDDzHg/ScJK1Q==}
-    engines: {node: '>=6'}
-    dev: true
-
   /pseudomap@1.0.2:
     resolution: {integrity: sha512-b/YwNhb8lk1Zz2+bXXpS/LK9OisiZZ1SNsSLxN1x2OXVEhW2Ckr/7mWE5vrC1ZTiJlD9g19jWszTmJsB+oEpFQ==}
     dev: true
@@ -4554,6 +4543,12 @@ packages:
       postcss: 8.4.31
       postcss-scss: 4.0.9(postcss@8.4.31)
       svelte: 4.2.5
+    dev: true
+
+  /svelte-highlight@7.4.1:
+    resolution: {integrity: sha512-ZjPUQn16bESqmzXzrQXfWKidwUabHNxysGIOUdbsxqBtDe8s33V9z6K697sszQITQ9k6hrMUpTICWLm2GIW5xQ==}
+    dependencies:
+      highlight.js: 11.9.0
     dev: true
 
   /svelte-hmr@0.15.3(svelte@4.2.5):

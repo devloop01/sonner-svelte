@@ -1,19 +1,19 @@
 <script lang="ts">
-	import Prism from 'prismjs';
-	import 'prism-svelte';
-
+	import Highlight, { HighlightSvelte } from 'svelte-highlight';
+	import javascript from 'svelte-highlight/languages/javascript';
+	import 'svelte-highlight/styles/grayscale-light.css';
 	import CopyButton from './copy-button.svelte';
 
 	export let code: string;
 	export let language = 'svelte';
-	let grammar = Prism.languages[language];
-
-	let formattedCode = Prism.highlight(code, grammar, language);
 </script>
 
 <div class="code-block">
-	<pre class="language-{language}"><code class="language-{language}">{@html formattedCode}</code
-		></pre>
+	{#if language === 'svelte'}
+		<HighlightSvelte {code} />
+	{:else}
+		<Highlight language={javascript} {code} />
+	{/if}
 	<CopyButton text={code} />
 </div>
 
