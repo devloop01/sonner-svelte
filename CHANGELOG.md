@@ -1,5 +1,11 @@
 # sonner-svelte
 
+## 0.2.0
+
+### Minor Changes
+
+- feat: add toast types - `action`, `cancel`, `custom` ([`278b538`](https://github.com/devloop01/sonner-svelte/commit/278b538aa8711267ddc178207be78c1038340307))
+
 ## 0.1.7
 
 ### Patch Changes
