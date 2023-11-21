@@ -11,7 +11,10 @@
 <img src="https://img.shields.io/npm/l/sonner-svelte?color=green&style=for-the-badge" />
 </a>
 <a aria-label="NPM version" href="https://npmjs.com/package/sonner-svelte">
-<img src="https://img.shields.io/npm/v/sonner-svelte?color=blue&style=for-the-badge" />
+<img src="https://img.shields.io/npm/v/sonner-svelte?color=ff3e00&style=for-the-badge" />
+</a>
+<a aria-label="NPM version" href="https://npmjs.com/package/sonner-svelte">
+<img src="https://img.shields.io/npm/dt/sonner-svelte?color=ff3e00&style=for-the-badge" />
 </a>
 </p>
 
