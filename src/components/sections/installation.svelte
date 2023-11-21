@@ -74,7 +74,6 @@
 		display: flex;
 		align-items: center;
 		border-radius: var(--radius);
-		border: 1px solid var(--gray6);
 
 		& button {
 			position: relative;
@@ -83,7 +82,6 @@
 			gap: 4px;
 			padding: 8px;
 			color: var(--gray12);
-			border-radius: var(--radius);
 			cursor: pointer;
 
 			& svg {
@@ -93,8 +91,8 @@
 
 			& .switcher__indicator {
 				position: absolute;
-				inset: 2px;
-				background: var(--gray5);
+				inset: 0px;
+				background: var(--gray4);
 				border-radius: var(--radius);
 				z-index: -1;
 			}
@@ -123,8 +121,8 @@
 		padding: 0 12px;
 		margin-top: 8px;
 		border-radius: var(--radius);
-		background: var(--gray2);
-		border: 1px solid var(--gray6);
+		background: var(--gray1);
+		border: 1px solid var(--gray4);
 		cursor: copy;
 
 		& code {

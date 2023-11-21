@@ -23,7 +23,7 @@
 		display: grid;
 
 		& > pre {
-			font-size: 14px;
+			font-size: 13px;
 			display: block;
 			margin: 0;
 		}

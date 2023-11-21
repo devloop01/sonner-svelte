@@ -31,11 +31,16 @@
 		<a class="button" href="https://github.com/devloop01/sonner-svelte" target="_blank">Github</a>
 	</div>
 
-	<p>
-		ported from <a class="link" href="https://sonner.emilkowal.ski/" target="_blank">sonner</a>
-	</p>
-
-	<span class="version-badge">version {$page.data.version}</span>
+	<div class="badges">
+		<span class="badge">
+			<a href="https://www.npmjs.com/package/sonner-svelte" target="_blank">
+				version {$page.data.version}
+			</a>
+		</span>
+		<span class="badge">
+			<a href="https://sonner.emilkowal.ski/" target="_blank">ported</a>
+		</span>
+	</div>
 </div>
 
 <style lang="postcss">
@@ -179,14 +184,22 @@
 		}
 	}
 
-	.version-badge {
+	.badges {
+		/* margin: 8px 0; */
+	}
+
+	.badge {
 		color: var(--gray11);
 		font-weight: 500;
-		font-size: 14px;
+		font-size: 13px;
 		border: 1px solid var(--gray5);
 		border-radius: 20px;
-		padding: 2px 8px;
-		margin-top: 8px;
+		padding: 4px 10px;
+		transition: background 200ms ease;
+
+		&:hover {
+			background: var(--gray2);
+		}
 	}
 
 	@media (max-width: 420px) {
@@ -197,14 +210,6 @@
 		.buttons {
 			flex-direction: column;
 			gap: 8px;
-		}
-	}
-
-	.link {
-		font-weight: 600;
-
-		&:hover {
-			text-decoration: underline;
 		}
 	}
 </style>

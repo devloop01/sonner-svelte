@@ -50,6 +50,6 @@
 	.footer--text a:hover,
 	.footer--text a:focus-visible {
 		outline: none;
-		background: rgb(0 0 0 / 0.08);
+		background: rgb(0 0 0 / 0.05);
 	}
 </style>
