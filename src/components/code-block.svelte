@@ -8,11 +8,11 @@
 	export let language = 'svelte';
 	let grammar = Prism.languages[language];
 
-	let formattedCode = Prism.highlight(code, grammar, language);
+	$: highlighted = Prism.highlight(code, grammar, language);
 </script>
 
 <div class="code-block">
-	<pre class="language-{language}"><code class="language-{language}">{@html formattedCode}</code
+	<pre class="language-{language}"><code class="language-{language}">{@html highlighted}</code
 		></pre>
 	<CopyButton text={code} />
 </div>
@@ -26,6 +26,7 @@
 			font-size: 13px;
 			display: block;
 			margin: 0;
+			overflow-y: hidden;
 		}
 
 		& > button {

@@ -14,5 +14,5 @@
 <section>
 	<h3>Usage</h3>
 	<p>Render a toast on button click</p>
-	<CodeExample {examples} showButtons={false} />
+	<CodeExample {examples} />
 </section>

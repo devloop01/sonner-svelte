@@ -122,7 +122,7 @@
 		margin-top: 8px;
 		border-radius: var(--radius);
 		background: var(--gray1);
-		border: 1px solid var(--gray4);
+		border: 1px solid var(--gray5);
 		cursor: copy;
 
 		& code {

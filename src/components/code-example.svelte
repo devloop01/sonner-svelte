@@ -10,13 +10,12 @@
 
 	export let examples: Example[];
 	export let language = 'svelte';
-	export let showButtons = true;
 
 	let current = examples[0];
 </script>
 
 <div>
-	{#if showButtons}
+	{#if examples.length > 1}
 		<div class="buttons">
 			{#each examples as example (example.name)}
 				<button
@@ -33,7 +32,7 @@
 		</div>
 	{/if}
 
-	<div class="code-example" use:autoAnimate>
+	<div class="code-example" use:autoAnimate={{ duration: 180, easing: 'linear' }}>
 		{#each examples as example (example.name)}
 			{#if example.name === current.name}
 				<CodeBlock code={current.snippet} {language} />
@@ -46,6 +45,6 @@
 	.code-example {
 		background: var(--gray1);
 		border-radius: var(--radius);
-		border: 1px solid var(--gray4);
+		border: 1px solid var(--gray5);
 	}
 </style>
