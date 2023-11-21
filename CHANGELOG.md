@@ -1,5 +1,11 @@
 # sonner-svelte
 
+## 0.2.1
+
+### Patch Changes
+
+- feat: add toast type - `promise` ([`afb12c2`](https://github.com/devloop01/sonner-svelte/commit/afb12c2a4c2464a351089fee237ef0ca424a3580))
+
 ## 0.2.0
 
 ### Minor Changes
