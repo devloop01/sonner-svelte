@@ -57,15 +57,3 @@ export const clearToastFromRemoveQueue = (toastId: string) => {
 	const timeout = toastTimeouts.get(toastId);
 	if (timeout) clearTimeout(timeout);
 };
-
-// export function useToastStore() {
-// 	return {
-// 		toasts,
-// 		add: upsertToast,
-// 		update: updateToast,
-// 		dismiss: dismissToast,
-// 		remove: removeToast,
-// 		addToQueue: addToastToRemoveQueue,
-// 		clearFromQueue: clearToastFromRemoveQueue
-// 	};
-// }

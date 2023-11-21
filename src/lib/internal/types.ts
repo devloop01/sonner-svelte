@@ -56,18 +56,7 @@ export type PromiseToastOptions<T = unknown> = DefaultToastOptions & {
 	error: ValueOrFunction<Renderable, unknown>;
 };
 
-export interface ToasterContext {
-	// toasts: Writable<Toast[]>;
-	// heights: Writable<HeightT[]>;
-	// invert: boolean;
-	// visibleToasts: number;
-	// closeButton: boolean;
-	// interacting: boolean;
-	// position: ToastPosition;
-	// expandByDefault: boolean;
-	// gap: number;
-	// expanded: boolean;
-}
+export interface ToasterContext {}
 
 export interface HeightT {
 	height: number;
