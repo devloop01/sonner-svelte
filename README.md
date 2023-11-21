@@ -1,12 +1,18 @@
 <p align="center">
+<a href="https://sonner-svelte.vercel.app">
 <img src="./banner.png" alt="" />
+</a>
 </p>
 <p align="center">
-<img src="https://img.shields.io/npm/l/sonner-svelte?color=blue" />
-<img src="https://img.shields.io/npm/v/sonner-svelte?color=red" />
-</p>
-<p align="center">
-<a href="https://sonner-svelte.vercel.app">Website</a> · <a href="https://npmjs.com/package/sonner-svelte">NPM Package</a>
+<a aria-label="Website" href="https://sonner-svelte.vercel.app">
+<img src="https://img.shields.io/badge/website-ffffff?style=for-the-badge&logo=svelte" />
+</a>
+<a aria-label="License" href="https://github.com/devloop01/sonner-svelte/blob/main/LICENSE">
+<img src="https://img.shields.io/npm/l/sonner-svelte?color=green&style=for-the-badge" />
+</a>
+<a aria-label="NPM version" href="https://npmjs.com/package/sonner-svelte">
+<img src="https://img.shields.io/npm/v/sonner-svelte?color=blue&style=for-the-badge" />
+</a>
 </p>
 
 # sonner-svelte
