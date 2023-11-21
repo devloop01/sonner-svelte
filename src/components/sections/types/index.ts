@@ -10,6 +10,7 @@ interface Example {
 }
 
 const promiseCode = '`${data.name} toast has been added`';
+
 export const examples: Example[] = [
 	{
 		name: 'Default',
@@ -72,23 +73,23 @@ toast.promise(promise, {
     return ${promiseCode};
   },
   error: 'Error',
-});`
-		// action: () =>
-		//   toast.promise<{ name: string }>(
-		//     () =>
-		//       new Promise((resolve) => {
-		//         setTimeout(() => {
-		//           resolve({ name: 'Sonner' });
-		//         }, 2000);
-		//       }),
-		//     {
-		//       loading: 'Loading...',
-		//       success: (data) => {
-		//         return `${data.name} toast has been added`;
-		//       },
-		//       error: 'Error',
-		//     },
-		//   ),
+});`,
+		action: () =>
+			toast.promise<{ name: string }>(
+				() =>
+					new Promise((resolve) => {
+						setTimeout(() => {
+							resolve({ name: 'Sonner' });
+						}, 2000);
+					}),
+				{
+					loading: 'Loading...',
+					success: (data) => {
+						return `${data.name} toast has been added`;
+					},
+					error: 'Error'
+				}
+			)
 	},
 	{
 		name: 'Custom',

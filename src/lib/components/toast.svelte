@@ -20,6 +20,7 @@
 	import { onMount } from 'svelte';
 	import { toasts, heights, addToastToRemoveQueue, dismissToast } from '$lib/internal/store.js';
 	import { SWIPE_THRESHOLD } from '$lib/internal/constants.js';
+	import { noop } from '$lib/internal/utils.js';
 	import { LoaderIcon, getIcon } from './icons/index.js';
 
 	export let toast: ToastProps['toast'];
@@ -172,7 +173,7 @@
 	data-sonner-sv-toast
 	data-styled={styled}
 	data-mounted={mounted}
-	data-promise={toast.promise}
+	data-promise={!!toast.promise}
 	data-removed={removed}
 	data-visible={isVisible}
 	data-y-position={y}
@@ -184,7 +185,7 @@
 	data-type={toastType}
 	data-invert={invert}
 	data-swipe-out={swipeOut}
-	data-expanded={Boolean(expanded || (expandByDefault && mounted))}
+	data-expanded={expanded || (expandByDefault && mounted)}
 	on:pointerdown={handlePointerDown}
 	on:pointerup={handlePointerUp}
 	on:pointermove={handlePointerMove}
@@ -202,7 +203,7 @@
 			data-disabled={disabled}
 			data-close-button
 			on:click={disabled || !dismissible
-				? () => {}
+				? noop
 				: () => {
 						deleteToast();
 						//   toast.onDismiss?.(toast);
@@ -230,7 +231,7 @@
 	{:else}
 		{#if toastType || toast.icon || toast.promise}
 			<div data-icon>
-				{#if (toast.promise || toast.type === 'loading') && !toast.icon}
+				{#if toast.promise || toastType === 'loading'}
 					<LoaderIcon visible={toastType === 'loading'} />
 				{/if}
 				<svelte:component this={toast.icon ?? getIcon(toastType)} />

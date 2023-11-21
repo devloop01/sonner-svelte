@@ -199,7 +199,7 @@
 
 <svelte:document on:keydown={handleKeyDown} />
 
-{#if $toasts.length}
+{#if true}
 	<section
 		aria-label={`Notifications ${hotkeyLabel}`}
 		tabIndex={-1}

@@ -1,9 +1,10 @@
 import type {
 	DefaultToastOptions,
+	PromiseToastOptions,
+	PromiseT,
 	Renderable,
 	Toast,
-	ToastType,
-	ValueOrFunction
+	ToastType
 } from './types.js';
 import { dismissToast, upsertToast, removeToast } from './store.js';
 import { genId, resolveValue } from './utils.js';
@@ -36,51 +37,30 @@ const createHandler =
 const toast = (message: Message, opts?: DefaultToastOptions) => createHandler()(message, opts);
 
 toast.message = createHandler();
-toast.success = createHandler('success');
 toast.info = createHandler('info');
 toast.warning = createHandler('warning');
-toast.error = createHandler('error');
 toast.loading = createHandler('loading');
-
+toast.success = createHandler('success');
+toast.error = createHandler('error');
 toast.custom = createHandler();
 
-toast.dismiss = (toastId?: string) => {
-	dismissToast(toastId);
-};
-
+toast.dismiss = (toastId?: string) => dismissToast(toastId);
 toast.remove = (toastId?: string) => removeToast(toastId);
 
-toast.promise = <T>(
-	promise: Promise<T>,
-	msgs: {
-		loading: Renderable;
-		success: ValueOrFunction<Renderable, T>;
-		error: ValueOrFunction<Renderable, unknown>;
-	},
-	opts?: DefaultToastOptions
-) => {
-	const id = toast.loading(msgs.loading, { ...opts, ...opts?.loading });
+toast.promise = <T>(promise: PromiseT<T>, opts?: PromiseToastOptions<T>) => {
+	if (!opts) return;
 
-	promise
-		.then((p) => {
-			toast.success(resolveValue(msgs.success, p), {
-				id,
-				...opts,
-				...opts?.success
-			});
-			return p;
-		})
-		.catch((e) => {
-			toast.error(resolveValue(msgs.error, e), {
-				id,
-				...opts,
-				...opts?.error
-			});
-		});
+	const id = toast.loading(opts.loading, { ...opts, promise });
+	const p = resolveValue(promise, undefined);
+
+	p.then((res) => {
+		toast.success(resolveValue(opts.success, res), { id, ...opts });
+		return res;
+	}).catch((e) => {
+		toast.error(resolveValue(opts.error, e), { id, ...opts });
+	});
 
 	return promise;
 };
-
-// toast.loading =  createHandler('')
 
 export { toast };

@@ -12,8 +12,7 @@ export type ToastPosition =
 
 export type Renderable = ComponentType | string;
 
-export type ValueFunction<TValue, TArg> = (arg: TArg) => TValue;
-export type ValueOrFunction<TValue, TArg> = TValue | ValueFunction<TValue, TArg>;
+export type PromiseT<T = unknown> = ValueOrFunction<Promise<T>, void>;
 
 export interface Toast {
 	id: string;
@@ -28,7 +27,7 @@ export interface Toast {
 	dismissible?: boolean;
 	important?: boolean;
 	unstyled?: boolean;
-	promise?: boolean;
+	promise?: PromiseT;
 	pauseDuration: number;
 	closeDelay: number;
 	timeout: ReturnType<typeof setTimeout> | null;
@@ -45,15 +44,16 @@ export interface Toast {
 	};
 }
 
-export type ToastOptions = Partial<
-	Pick<
-		Toast,
-		'id' | 'icon' | 'duration' | 'position' | 'description' | 'dismissible' | 'action' | 'cancel'
-	>
->;
+export type ToastOptions = Partial<Omit<Toast, 'id' | 'type' | 'title'>> & { id?: string };
 
 export type DefaultToastOptions = ToastOptions & {
 	[key in ToastType]?: ToastOptions;
+};
+
+export type PromiseToastOptions<T = unknown> = DefaultToastOptions & {
+	loading: Renderable;
+	success: ValueOrFunction<Renderable, T>;
+	error: ValueOrFunction<Renderable, unknown>;
 };
 
 export interface ToasterContext {
@@ -83,3 +83,6 @@ export enum SwipeStateTypes {
 export type Theme = 'light' | 'dark';
 
 export type WithTarget<Event, Target> = Event & { currentTarget: Target };
+
+export type ValueFunction<TValue, TArg> = (arg: TArg) => TValue;
+export type ValueOrFunction<TValue, TArg> = TValue | ValueFunction<TValue, TArg>;
