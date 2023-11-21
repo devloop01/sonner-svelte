@@ -113,8 +113,8 @@
 		dragStartTime = new Date();
 		offsetBeforeRemove = offset;
 		// Ensure we maintain correct pointer capture even when going outside of the toast (e.g. when swiping)
-		(event.currentTarget as HTMLElement).setPointerCapture(event.pointerId);
-		if ((event.currentTarget as HTMLElement).tagName === 'BUTTON') return;
+		(event.target as HTMLElement).setPointerCapture(event.pointerId);
+		if ((event.target as HTMLElement).tagName === 'BUTTON') return;
 		swiping = true;
 		pointerStart = { x: event.clientX, y: event.clientY };
 	};
@@ -225,51 +225,50 @@
 		</button>
 	{/if}
 
-	<!-- {#if toast.title && typeof toast.title !== 'string'}
+	{#if typeof toast.title !== 'string'}
 		<svelte:component this={toast.title} />
-	{/if} -->
-	{#if toastType || toast.icon || toast.promise}
-		<div data-icon>
-			{#if (toast.promise || toast.type === 'loading') && !toast.icon}
-				<LoaderIcon visible={toastType === 'loading'} />
-			{/if}
-			<svelte:component this={toast.icon ?? getIcon(toastType)} />
-		</div>
-	{/if}
-
-	<div data-content>
-		<span data-title>{toast.title}</span>
-		{#if toast.description}
-			<span data-description>{toast.description}</span>
+	{:else}
+		{#if toastType || toast.icon || toast.promise}
+			<div data-icon>
+				{#if (toast.promise || toast.type === 'loading') && !toast.icon}
+					<LoaderIcon visible={toastType === 'loading'} />
+				{/if}
+				<svelte:component this={toast.icon ?? getIcon(toastType)} />
+			</div>
 		{/if}
-	</div>
 
-	{#if false}
-		<button
-			data-button
-			data-cancel
-			on:click={() => {
-				if (!dismissible) return;
-				deleteToast();
-				//   if (toast.cancel?.onClick) {
-				// toast.cancel.onClick();
-				//   }
-			}}
-		>
-			<!-- {toast.cancel.label} -->
-		</button>
-	{/if}
+		<div data-content>
+			<span data-title>{toast.title}</span>
+			{#if toast.description}
+				<span data-description>{toast.description}</span>
+			{/if}
+		</div>
 
-	{#if false}
-		<button
-			data-button
-			on:click={(event) => {
-				//   toast.action?.onClick(event);
-				//   if (event.defaultPrevented) return;
-				deleteToast();
-			}}
-		>
-			<!-- {toast.action.label} -->
-		</button>
+		{#if toast.cancel}
+			<button
+				data-button
+				data-cancel
+				on:click={() => {
+					if (!dismissible) return;
+					deleteToast();
+					toast.cancel?.onClick?.();
+				}}
+			>
+				{toast.cancel.label}
+			</button>
+		{/if}
+
+		{#if toast.action}
+			<button
+				data-button
+				on:click={(event) => {
+					toast.action?.onClick(event);
+					if (event.defaultPrevented) return;
+					deleteToast();
+				}}
+			>
+				{toast.action.label}
+			</button>
+		{/if}
 	{/if}
 </li>

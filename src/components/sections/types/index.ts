@@ -1,6 +1,7 @@
 export { default as Types } from './types.svelte';
 
 import { toast } from '$lib';
+import CustomToast from './custom-toast.svelte';
 
 interface Example {
 	name: string;
@@ -52,14 +53,14 @@ export const examples: Example[] = [
     label: 'Undo',
     onClick: () => console.log('Undo')
   },
-})`
-		// action: () =>
-		// 	toast.message('Event has been created', {
-		// 		action: {
-		// 			label: 'Undo',
-		// 			onClick: () => console.log('Undo')
-		// 		}
-		// 	})
+})`,
+		action: () =>
+			toast.message('Event has been created', {
+				action: {
+					label: 'Undo',
+					onClick: () => console.log('Undo')
+				}
+			})
 	},
 	{
 		name: 'Promise',
@@ -91,7 +92,9 @@ toast.promise(promise, {
 	},
 	{
 		name: 'Custom',
-		snippet: `toast(<div>A custom toast with default styling</div>)`
-		// action: () => toast(<div>A custom toast with default styling</div>),
+		snippet: `import CustomToast from './CustomToast.svelte';
+
+toast(CustomToast)`,
+		action: () => toast(CustomToast)
 	}
 ];

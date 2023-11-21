@@ -33,7 +33,7 @@ const createHandler =
 		return toast.id;
 	};
 
-const toast = (message: string, opts?: DefaultToastOptions) => createHandler()(message, opts);
+const toast = (message: Message, opts?: DefaultToastOptions) => createHandler()(message, opts);
 
 toast.message = createHandler();
 toast.success = createHandler('success');

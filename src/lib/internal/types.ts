@@ -1,18 +1,14 @@
 import type { ComponentType } from 'svelte';
 
-export type ToastType = 'normal' | 'action' | 'success' | 'info' | 'warning' | 'error' | 'loading';
+export type ToastType = 'normal' | 'info' | 'warning' | 'loading' | 'success' | 'error' | 'action';
 
 export type ToastPosition =
 	| 'top-left'
-	| 'top-center'
 	| 'top-right'
 	| 'bottom-left'
-	| 'bottom-center'
 	| 'bottom-right'
-	| 'top-start'
-	| 'top-end'
-	| 'bottom-start'
-	| 'bottom-end';
+	| 'top-center'
+	| 'bottom-center';
 
 export type Renderable = ComponentType | string;
 
@@ -38,11 +34,22 @@ export interface Toast {
 	timeout: ReturnType<typeof setTimeout> | null;
 	pausedAt?: number;
 	delete?: boolean;
-	// height?: number;
+
+	action?: {
+		label: string;
+		onClick: (event: MouseEvent) => void;
+	};
+	cancel?: {
+		label: string;
+		onClick?: () => void;
+	};
 }
 
 export type ToastOptions = Partial<
-	Pick<Toast, 'id' | 'icon' | 'duration' | 'position' | 'description' | 'dismissible'>
+	Pick<
+		Toast,
+		'id' | 'icon' | 'duration' | 'position' | 'description' | 'dismissible' | 'action' | 'cancel'
+	>
 >;
 
 export type DefaultToastOptions = ToastOptions & {

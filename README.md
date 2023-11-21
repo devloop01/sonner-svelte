@@ -22,7 +22,7 @@
 
 > An opinionated toast notification library for Svelte.
 
-`svelte-sonner` is a svelte port of Emil Kowalski's react library `sonner`
+`sonner-svelte` is a svelte port of Emil Kowalski's react library `sonner`
 
 ## Installation
 
@@ -37,22 +37,72 @@ yarn add sonner-svelte
 
 ## Basic Usage
 
-```html
+```svelte
 <script>
 import { toast, Toaster } from 'sonner-svelte';
+</script>
 
-function handleClick() {
-    toast('This is a toast message')
+<Toaster />
+<button on:click={() => toast('This is a toast message')}>Render toast</button>
+```
+
+For more examples, check out the [website](https://sonner-svelte.vercel.app)
+
+## API
+
+The api is similar to the react version, with a few differences
+
+### Differences from react version
+
+In the react version, custom toast components are passed as `jsx` elements, but in svelte, we can't do that. So, we pass the component as a `SvelteComponent` instead.
+
+```svelte
+<!-- CustomToast.svelte -->
+<script>
+export let message;
+</script>
+
+<p>Hello {message}</p>
+```
+
+```svelte
+<script>
+import { toast, Toaster } from 'sonner-svelte';
+import CustomToast from './CustomToast.svelte';
+
+const handleClick = () => {
+    toast(CustomToast, { message: 'World!' })
 }
 </script>
 
 <Toaster />
-<button on:click={handleClick}>toast</button>
+<button on:click={handleClick}>Render toast</button>
 ```
 
-Add `<Toaster />` in your app root. This is where the toast notifications will be rendered. Then import `toast` and use it to show a toast notification.
+Similarly, when you want to create a custom headless toast, you need to pass the component as a `SvelteComponent` instead of a `jsx` element
 
-For more examples, check out the [website](https://sonner-svelte.vercel.app/)
+```svelte
+<!-- HeadlessToast.svelte -->
+<script>
+export let message;
+</script>
+
+<p>Hello {message}</p>
+```
+
+```svelte
+<script>
+import { toast, Toaster } from 'sonner-svelte';
+import HeadlessToast from './HeadlessToast.svelte';
+
+const handleClick = () => {
+    toast.custom(HeadlessToast, { message: 'World!' })
+}
+</script>
+
+<Toaster />
+<button on:click={handleClick}>Render toast</button>
+```
 
 ## Acknowledgements
 
