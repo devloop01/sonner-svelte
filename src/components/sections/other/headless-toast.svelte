@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { toast as _toast, type Toast } from '$lib';
+	import _toast, { type Toast } from '$lib';
 
 	export let event: string;
 	export let toast: Toast;

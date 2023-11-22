@@ -82,7 +82,7 @@ Similarly, when you want to create a custom headless (unstyled) toast, you need 
 ```svelte
 <!-- HeadlessToast.svelte -->
 <script>
-    import { toast as _toast } from 'sonner-svelte';
+    import _toast from 'sonner-svelte';
     export let event;
     export let toast; // this is available when you pass a custom component. You don't need to pass it manually
 </script>
