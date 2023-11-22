@@ -1,5 +1,17 @@
 # sonner-svelte
 
+## 0.2.2
+
+### Patch Changes
+
+- fix: remove `<Toaster />` when no `toasts` ([`b2d9289`](https://github.com/devloop01/sonner-svelte/commit/b2d928965c8fdeed210ed3b57395c6da46fd011e))
+
+- feat: export neccesary types ([`8a79ac0`](https://github.com/devloop01/sonner-svelte/commit/8a79ac0428fea9c7da1585f10438f384667462f5))
+
+- feat: create headless (unstyled) toasts using `toast.custom` ([`e6297ec`](https://github.com/devloop01/sonner-svelte/commit/e6297ec1df650c4971ce583ad4e01634294d4473))
+
+- chore: remove unwanted comments ([`850a915`](https://github.com/devloop01/sonner-svelte/commit/850a915988fb3ebc2c62dc3b5fc831d698028760))
+
 ## 0.2.1
 
 ### Patch Changes
