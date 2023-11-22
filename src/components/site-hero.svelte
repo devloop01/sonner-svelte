@@ -1,6 +1,6 @@
 <script>
 	import { page } from '$app/stores';
-	import { Star, Logo } from '@/components/icons';
+	import { Star, Logo, ExternalLink } from '@/components/icons';
 
 	import { toast } from '$lib';
 </script>
@@ -34,11 +34,13 @@
 	<div class="badges">
 		<span class="badge">
 			<a href="https://www.npmjs.com/package/sonner-svelte" target="_blank">
-				version {$page.data.version}
+				v{$page.data.version}
 			</a>
+			<ExternalLink width={12} height={12} />
 		</span>
 		<span class="badge">
 			<a href="https://sonner.emilkowal.ski/" target="_blank">ported</a>
+			<ExternalLink width={12} height={12} />
 		</span>
 	</div>
 </div>
@@ -194,11 +196,39 @@
 		font-size: 13px;
 		border: 1px solid var(--gray5);
 		border-radius: 20px;
-		padding: 4px 10px;
+		padding: 3px 12px;
 		transition: background 200ms ease;
+		display: inline-flex;
+		align-items: center;
+		/* justify-content: center; */
+		cursor: pointer;
+		gap: 0px;
+		transition: 300ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+		transition-property: gap;
+		transition-delay: 100ms;
+
+		& > svg {
+			width: 0;
+			scale: 0;
+			opacity: 0;
+			transition: 300ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+			transition-property: width, scale, opacity, margin;
+			transition-delay: 40ms;
+			transform-origin: top;
+		}
 
 		&:hover {
 			background: var(--gray2);
+			gap: 6px;
+			transition-delay: 0ms;
+
+			& > svg {
+				width: 12px;
+				opacity: 1;
+				scale: 1;
+				transform-origin: bottom;
+				transition-delay: 0ms;
+			}
 		}
 	}
 

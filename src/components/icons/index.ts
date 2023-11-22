@@ -5,3 +5,4 @@ export { default as Npm } from './npm.svelte';
 export { default as Pnpm } from './pnpm.svelte';
 export { default as Yarn } from './yarn.svelte';
 export { default as Logo } from './logo.svelte';
+export { default as ExternalLink } from './external-link.svelte';
