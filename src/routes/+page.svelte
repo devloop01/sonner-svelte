@@ -9,10 +9,10 @@
 		Other
 	} from '@/components/sections';
 
-	import { Toaster } from '$lib';
+	import { Toaster, type ToastPosition } from '$lib';
 
 	let expand = false;
-	let position = 'bottom-right' as const;
+	let position: ToastPosition = 'bottom-right';
 	let richColors = false;
 	let closeButton = false;
 </script>
