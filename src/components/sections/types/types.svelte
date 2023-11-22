@@ -5,7 +5,7 @@
 </script>
 
 <section>
-	<h3>Types</h3>
+	<h2>Types</h2>
 	<p>
 		You can customize the type of toast you want to render, and pass an options object as the second
 		argument.

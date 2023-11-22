@@ -30,7 +30,7 @@
 </script>
 
 <section>
-	<h3>Expand</h3>
+	<h2>Expand</h2>
 	<p>
 		You can change the amount of toasts visible through the <code>visibleToasts</code> prop.
 	</p>

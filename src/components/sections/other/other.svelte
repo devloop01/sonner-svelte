@@ -92,7 +92,7 @@ toast.custom(HeadlessToast, {
 </script>
 
 <section>
-	<h3>Other</h3>
+	<h2>Other</h2>
 
 	<CodeExample {examples} language="js" />
 </section>

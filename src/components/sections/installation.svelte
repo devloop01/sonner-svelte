@@ -30,7 +30,7 @@
 
 <section>
 	<div>
-		<h3>Installation</h3>
+		<h2>Installation</h2>
 		<div class="switcher" role="tablist">
 			{#each installers as installer (installer.name)}
 				{@const isActive = installer.name === currentInstaller.name}

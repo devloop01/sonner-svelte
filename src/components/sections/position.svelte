@@ -1,7 +1,6 @@
 <script lang="ts">
 	import CodeExample from '@/components/code-example.svelte';
 	import { toast, type ToastPosition } from '$lib';
-	import type { Example } from '.';
 
 	const positions = [
 		'top-left',
@@ -33,7 +32,7 @@
 </script>
 
 <section>
-	<h3>Position</h3>
+	<h2>Position</h2>
 	<p>Swipe direction changes depending on the position.</p>
 
 	<CodeExample {examples} />

@@ -12,7 +12,7 @@
 </script>
 
 <section>
-	<h3>Usage</h3>
+	<h2>Usage</h2>
 	<p>Render a toast on button click</p>
 	<CodeExample {examples} />
 </section>

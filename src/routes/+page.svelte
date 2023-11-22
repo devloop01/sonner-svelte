@@ -15,6 +15,7 @@
 	let position: ToastPosition = 'bottom-right';
 	let richColors = false;
 	let closeButton = false;
+	let theme = 'light' as const;
 </script>
 
 <div class="container">
@@ -30,7 +31,7 @@
 	<SiteFooter />
 </div>
 
-<Toaster theme="light" {richColors} {closeButton} {expand} {position} />
+<Toaster {theme} {richColors} {closeButton} {expand} {position} />
 
 <style>
 	.container {
