@@ -44,7 +44,6 @@
 	let swipeOut = false;
 
 	$: toastType = toast.type;
-	$: styled = !toast.unstyled;
 	$: dismissible = toast.dismissible !== false;
 	$: invert = toast.invert || toastInvert;
 	$: disabled = toast.type === 'loading';
@@ -171,7 +170,7 @@
 	role="status"
 	class=""
 	data-sonner-sv-toast
-	data-styled={styled}
+	data-styled={!toast.component}
 	data-mounted={mounted}
 	data-promise={!!toast.promise}
 	data-removed={removed}
@@ -226,8 +225,10 @@
 		</button>
 	{/if}
 
-	{#if typeof toast.title !== 'string'}
-		<svelte:component this={toast.title} />
+	{#if toast.component}
+		<svelte:component this={toast.component} {...toast.props} {toast} />
+	{:else if typeof toast.title !== 'string'}
+		<svelte:component this={toast.title} {...toast.props} {toast} />
 	{:else}
 		{#if toastType || toast.icon || toast.promise}
 			<div data-icon>

@@ -1,5 +1,11 @@
 <script lang="ts" context="module">
-	import type { ToastOptions, ToastPosition, WithTarget } from '$lib/internal/types.js';
+	import type {
+		Direction,
+		Theme,
+		ToastOptions,
+		ToastPosition,
+		WithTarget
+	} from '$lib/internal/types.js';
 
 	interface ToasterProps {
 		hotkey: string[];
@@ -7,8 +13,8 @@
 		offset: string | number;
 		visibleToasts: number;
 		expand: boolean;
-		theme: 'light' | 'dark' | 'system';
-		dir: 'rtl' | 'ltr' | 'auto';
+		theme: Theme;
+		dir: Direction;
 		richColors: boolean;
 		invert: boolean;
 		duration: number;

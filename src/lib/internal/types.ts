@@ -1,6 +1,14 @@
-import type { ComponentType } from 'svelte';
+import type { SvelteComponent } from 'svelte';
 
-export type ToastType = 'normal' | 'info' | 'warning' | 'loading' | 'success' | 'error' | 'action';
+export type ToastType =
+	| 'normal'
+	| 'info'
+	| 'warning'
+	| 'loading'
+	| 'success'
+	| 'error'
+	| 'action'
+	| 'custom';
 
 export type ToastPosition =
 	| 'top-left'
@@ -10,29 +18,34 @@ export type ToastPosition =
 	| 'top-center'
 	| 'bottom-center';
 
-export type Renderable = ComponentType | string;
+export type RecordT = Record<string, unknown>;
+
+export type Component<T extends RecordT = RecordT> = typeof SvelteComponent<T>;
+
+export type Renderable<T extends RecordT = RecordT> = Component<T> | string;
 
 export type PromiseT<T = unknown> = ValueOrFunction<Promise<T>, void>;
 
-export interface Toast {
+export interface Toast<T extends RecordT = RecordT> {
 	id: string;
 	type?: ToastType;
-	title: Renderable;
-	description?: Renderable;
+	title: Renderable<T>;
+	description?: Renderable<T>;
 	createdAt: number;
-	icon?: ComponentType;
+	icon?: Component<T>;
 	duration?: number;
 	position?: ToastPosition;
 	invert?: boolean;
 	dismissible?: boolean;
 	important?: boolean;
-	unstyled?: boolean;
 	promise?: PromiseT;
 	pauseDuration: number;
 	closeDelay: number;
 	timeout: ReturnType<typeof setTimeout> | null;
 	pausedAt?: number;
 	delete?: boolean;
+	component?: Component<T>;
+	props?: Omit<T, 'toast'>;
 
 	action?: {
 		label: string;
@@ -44,13 +57,11 @@ export interface Toast {
 	};
 }
 
-export type ToastOptions = Partial<Omit<Toast, 'id' | 'type' | 'title'>> & { id?: string };
+export type ToastOptions<T extends RecordT = RecordT> = Partial<
+	Omit<Toast<T>, 'id' | 'type' | 'title'>
+> & { id?: string };
 
-export type DefaultToastOptions = ToastOptions & {
-	[key in ToastType]?: ToastOptions;
-};
-
-export type PromiseToastOptions<T = unknown> = DefaultToastOptions & {
+export type PromiseToastOptions<T = unknown> = ToastOptions & {
 	loading: Renderable;
 	success: ValueOrFunction<Renderable, T>;
 	error: ValueOrFunction<Renderable, unknown>;
@@ -69,7 +80,8 @@ export enum SwipeStateTypes {
 	NotSwiped = 'NotSwiped'
 }
 
-export type Theme = 'light' | 'dark';
+export type Theme = 'light' | 'dark' | 'system';
+export type Direction = 'ltr' | 'rtl' | 'auto';
 
 export type WithTarget<Event, Target> = Event & { currentTarget: Target };
 
