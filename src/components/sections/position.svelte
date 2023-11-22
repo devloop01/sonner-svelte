@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { CodeExample } from '@/components';
-	import { toast } from '$lib';
+	import CodeExample from '@/components/code-example.svelte';
+	import { toast, type ToastPosition } from '$lib';
+	import type { Example } from '.';
 
 	const positions = [
 		'top-left',
@@ -11,9 +12,7 @@
 		'bottom-right'
 	] as const;
 
-	type Position = (typeof positions)[number];
-
-	let activePosition: Position;
+	let activePosition: ToastPosition;
 	export { activePosition as position };
 
 	let examples = positions.map((position) => ({
@@ -28,7 +27,8 @@
 			toast('Event has been created', {
 				description: 'Monday, January 3rd at 6:00pm'
 			});
-		}
+		},
+		active: position === activePosition
 	}));
 </script>
 

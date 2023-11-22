@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { CodeExample } from '@/components';
+	import CodeExample from '@/components/code-example.svelte';
 
 	import { usageCode } from './index.js';
 

@@ -1,13 +1,8 @@
 export { default as Types } from './types.svelte';
 
+import type { Example } from '../index';
 import { toast } from '$lib';
 import CustomToast from './custom-toast.svelte';
-
-interface Example {
-	name: string;
-	snippet: string;
-	action?: () => void;
-}
 
 const promiseCode = '`${data.name} toast has been added`';
 

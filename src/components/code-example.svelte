@@ -1,17 +1,12 @@
 <script lang="ts">
 	import autoAnimate from '@formkit/auto-animate';
 	import CodeBlock from '@/components/code-block.svelte';
-
-	interface Example {
-		name: string;
-		snippet: string;
-		action?: () => void;
-	}
+	import type { Example } from './sections';
 
 	export let examples: Example[];
 	export let language = 'svelte';
 
-	let current = examples[0];
+	let current = examples.find((example) => example.active) || examples[0];
 </script>
 
 <div>
@@ -24,6 +19,10 @@
 					on:click={() => {
 						current = example;
 						example.action?.();
+						examples = examples.map((example) => ({
+							...example,
+							active: example.name === current.name
+						}));
 					}}
 				>
 					{example.name}
