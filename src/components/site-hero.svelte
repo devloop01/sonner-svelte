@@ -205,7 +205,6 @@
 		gap: 0px;
 		transition: 300ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
 		transition-property: gap;
-		transition-delay: 100ms;
 
 		& > svg {
 			width: 0;
