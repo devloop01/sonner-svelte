@@ -61,8 +61,19 @@ export interface Toast<T extends RecordT = RecordT> {
 }
 
 export type ToastOptions<T extends RecordT = RecordT> = Partial<
-	Omit<Toast<T>, 'id' | 'type' | 'title'>
-> & { id?: string };
+	Omit<
+		Toast<T>,
+		| 'type'
+		| 'title'
+		| 'component'
+		| 'dismiss'
+		| 'promise'
+		| 'createdAt'
+		| 'pauseDuration'
+		| 'timeout'
+		| 'pausedAt'
+	>
+>;
 
 export type PromiseToastOptions<T = unknown> = ToastOptions & {
 	loading: Renderable;
