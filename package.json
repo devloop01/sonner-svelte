@@ -1,7 +1,7 @@
 {
 	"name": "sonner-svelte",
 	"description": "An opinionated toast library for Svelte",
-	"version": "0.2.2",
+	"version": "0.2.3",
 	"author": "Sikriti Dakua <sikriti.dev@gmail.com>",
 	"license": "MIT",
 	"keywords": [
