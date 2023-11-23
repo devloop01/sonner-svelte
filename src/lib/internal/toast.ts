@@ -24,22 +24,21 @@ const createToast = <T extends RecordT = RecordT>(
 	type?: ToastType,
 	opts?: ToastOptions<T>
 ): Toast<T> => ({
+	...opts,
 	type,
 	title: message,
 	createdAt: Date.now(),
-	pauseDuration: 0,
-	duration: opts?.duration || TOAST_LIFETIME,
 	timeout: null,
-	dismissible: opts?.dismissible || true,
-	id: opts?.id || genId(),
-	...opts
+	pauseDuration: 0,
+	duration: opts?.duration ?? TOAST_LIFETIME,
+	dismissible: opts?.dismissible ?? true,
+	id: opts?.id ?? genId()
 });
 
 const createHandler =
 	(type?: ToastType): ToastHandler =>
 	(message, options) => {
 		const toast = createToast(message, type, options);
-		console.log(toast.duration);
 		upsertToast(toast as Toast<RecordT>);
 		return toast.id;
 	};
@@ -54,7 +53,10 @@ toast.loading = createHandler('loading');
 toast.success = createHandler('success');
 toast.error = createHandler('error');
 
-toast.custom = <T extends RecordT = RecordT>(component: Component<T>, opts?: ToastOptions<T>) =>
+toast.custom = <T extends RecordT = RecordT>(
+	component: Component<T>,
+	opts?: ToastOptions<T> & { props?: Omit<T, 'toast'> }
+) =>
 	// @ts-expect-error component does not exist
 	createHandler('custom')(component, { ...opts, component });
 

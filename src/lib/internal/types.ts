@@ -66,6 +66,7 @@ export type ToastOptions<T extends RecordT = RecordT> = Partial<
 		| 'type'
 		| 'title'
 		| 'component'
+		| 'props'
 		| 'dismiss'
 		| 'promise'
 		| 'createdAt'
