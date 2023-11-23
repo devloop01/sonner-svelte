@@ -230,7 +230,6 @@
 				data-rich-colors={richColors}
 				data-y-position={y}
 				data-x-position={x}
-				data-dismissible={'false'}
 				on:blur={handleBlur}
 				on:focus={handleFocus}
 				on:mouseenter={() => (expanded = true)}
