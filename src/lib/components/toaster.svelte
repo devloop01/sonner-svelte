@@ -254,7 +254,7 @@
 					<Toast
 						{index}
 						{toast}
-						duration={toastOptions?.duration || duration}
+						duration={toastOptions.duration || duration}
 						{invert}
 						{visibleToasts}
 						{closeButton}
@@ -263,6 +263,11 @@
 						{gap}
 						{expanded}
 						{loadingIcon}
+						class={toastOptions.className}
+						descriptionClassName={toastOptions.descriptionClassName}
+						style={toastOptions.style}
+						actionButtonStyle={toastOptions.actionButtonStyle}
+						cancelButtonStyle={toastOptions.cancelButtonStyle}
 					/>
 				{/each}
 			</ol>

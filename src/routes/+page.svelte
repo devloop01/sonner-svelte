@@ -9,13 +9,14 @@
 		Other
 	} from '@/components/sections';
 
-	import { Toaster, type ToastPosition } from '$lib';
+	import type { ToastTheme, ToastPosition } from '$lib';
+	import { Toaster } from '$lib';
 
 	let expand = false;
 	let position: ToastPosition = 'bottom-right';
 	let richColors = false;
 	let closeButton = false;
-	let theme = 'light' as const;
+	let theme: ToastTheme = 'light';
 </script>
 
 <div class="container">

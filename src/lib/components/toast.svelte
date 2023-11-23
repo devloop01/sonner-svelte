@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	import type { Component, Toast, ToastPosition } from '$lib/internal/types.js';
+	import type { Component, Toast, ToastClassnames, ToastPosition } from '$lib/internal/types.js';
 
 	interface ToastProps {
 		index: number;
@@ -13,11 +13,18 @@
 		closeButton: boolean;
 		duration: number;
 		loadingIcon: Component;
+		style: string;
+		cancelButtonStyle: string;
+		actionButtonStyle: string;
+		className: string;
+		descriptionClassName: string;
+		classNames: ToastClassnames;
 	}
 </script>
 
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { cx } from 'classix';
 	import { toasts, heights, addToastToRemoveQueue, dismissToast } from '$lib/internal/store.js';
 	import { SWIPE_THRESHOLD } from '$lib/internal/constants.js';
 	import { noop } from '$lib/internal/utils.js';
@@ -35,6 +42,13 @@
 	export let closeButton: ToastProps['closeButton'];
 	export let duration: ToastProps['duration'] | undefined = undefined;
 	export let loadingIcon: ToastProps['loadingIcon'] | undefined = undefined;
+	export let style: ToastProps['style'] = '';
+	export let cancelButtonStyle: ToastProps['cancelButtonStyle'] = '';
+	export let actionButtonStyle: ToastProps['actionButtonStyle'] = '';
+	let className: ToastProps['className'] = '';
+	export { className as class };
+	export let descriptionClassName: ToastProps['descriptionClassName'] = '';
+	export let classNames: ToastProps['classNames'] = {};
 
 	let toastRef: HTMLLIElement | null;
 
@@ -90,6 +104,8 @@
 			toast.timeout && clearTimeout(toast.timeout);
 		};
 	});
+
+	// TODO: fix hot key interaction
 
 	$: {
 		if (mounted) {
@@ -173,7 +189,16 @@
 	aria-live={toast.important ? 'assertive' : 'polite'}
 	aria-atomic="true"
 	role="status"
-	class=""
+	class={cx(
+		className,
+		toast.className,
+		classNames?.toast,
+		toast?.classNames?.toast,
+		// @ts-ignore
+		classNames?.[toastType],
+		// @ts-ignore
+		toast?.classNames?.[toastType]
+	)}
 	data-sonner-sv-toast
 	data-styled={!Boolean(toast.component || toast.unstyled)}
 	data-mounted={mounted}
@@ -200,6 +225,7 @@
 		--offset: {removed ? offsetBeforeRemove : offset}px;
 		--initial-height: {expandByDefault ? 'auto' : `${initialHeight}px`};
 		--gap-between: {gap}px;
+		{style}
 	"
 >
 	{#if closeButton}
@@ -207,6 +233,7 @@
 			aria-label="Close toast"
 			data-disabled={disabled}
 			data-close-button
+			class={cx(classNames.closeButton, toast.classNames?.closeButton)}
 			on:click={disabled || !dismissible
 				? noop
 				: () => {
@@ -241,7 +268,10 @@
 			<div data-icon>
 				{#if toast.promise || isLoading}
 					{#if loadingIcon}
-						<div class="loader" data-visible={isLoading}>
+						<div
+							class={cx('loader', classNames.loader, toast.classNames?.loader)}
+							data-visible={isLoading}
+						>
 							<svelte:component this={loadingIcon} />
 						</div>
 					{:else}
@@ -253,9 +283,21 @@
 		{/if}
 
 		<div data-content>
-			<span data-title>{toast.title}</span>
+			<span data-title class={cx(classNames.title, toast.classNames?.title)}>
+				{toast.title}
+			</span>
 			{#if toast.description}
-				<span data-description>{toast.description}</span>
+				<span
+					data-description
+					class={cx(
+						descriptionClassName,
+						toast.descriptionClassName,
+						classNames.description,
+						toast.classNames?.description
+					)}
+				>
+					{toast.description}
+				</span>
 			{/if}
 		</div>
 
@@ -263,6 +305,8 @@
 			<button
 				data-button
 				data-cancel
+				style={cancelButtonStyle}
+				class={cx(classNames.cancelButton, toast.classNames?.cancelButton)}
 				on:click={() => {
 					if (!dismissible) return;
 					deleteToast();
@@ -276,6 +320,8 @@
 		{#if toast.action}
 			<button
 				data-button
+				style={actionButtonStyle}
+				class={cx(classNames.actionButton, toast.classNames?.actionButton)}
 				on:click={(event) => {
 					toast.action?.onClick(event);
 					if (event.defaultPrevented) return;

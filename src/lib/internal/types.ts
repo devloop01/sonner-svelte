@@ -58,6 +58,13 @@ export interface Toast<T extends RecordT = RecordT> {
 
 	onDismiss?: (toast: Toast<T>) => void;
 	onAutoClose?: (toast: Toast<T>) => void;
+
+	style?: string;
+	cancelButtonStyle?: string;
+	actionButtonStyle?: string;
+	className?: string;
+	descriptionClassName?: string;
+	classNames?: ToastClassnames;
 }
 
 export type ToastOptions<T extends RecordT = RecordT> = Partial<
@@ -88,6 +95,20 @@ export interface ToasterContext {}
 export interface HeightT {
 	height: number;
 	toastId: number | string;
+}
+
+export interface ToastClassnames {
+	toast?: string;
+	title?: string;
+	description?: string;
+	loader?: string;
+	closeButton?: string;
+	cancelButton?: string;
+	actionButton?: string;
+	success?: string;
+	error?: string;
+	info?: string;
+	warning?: string;
 }
 
 export enum SwipeStateTypes {
