@@ -121,7 +121,7 @@
 		align-items: center;
 		height: 40px;
 		padding: 0 12px;
-		margin-top: 8px;
+		margin-top: 12px;
 		border-radius: var(--radius);
 		background: var(--gray1);
 		border: 1px solid var(--gray5);
