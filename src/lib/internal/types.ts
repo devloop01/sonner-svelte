@@ -56,6 +56,9 @@ export interface Toast<T extends RecordT = RecordT> {
 		label: string;
 		onClick?: () => void;
 	};
+
+	onDismiss?: (toast: Toast<T>) => void;
+	onAutoClose?: (toast: Toast<T>) => void;
 }
 
 export type ToastOptions<T extends RecordT = RecordT> = Partial<

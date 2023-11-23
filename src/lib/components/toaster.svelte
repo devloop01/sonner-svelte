@@ -160,6 +160,7 @@
 
 					toast.timeout = setTimeout(() => {
 						dismissToast(toast.id);
+						toast.onAutoClose?.(toast);
 					}, remaining);
 
 					toast.pauseDuration += Date.now() - pausedAt;

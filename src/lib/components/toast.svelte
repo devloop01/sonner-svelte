@@ -132,7 +132,7 @@
 		// Remove only if threshold is met
 		if (Math.abs(swipeAmount) >= SWIPE_THRESHOLD || velocity > 0.11) {
 			offsetBeforeRemove = offset;
-			//   toast.onDismiss?.(toast);
+			toast.onDismiss?.(toast);
 			deleteToast();
 			swipeOut = true;
 			return;
@@ -208,7 +208,7 @@
 				? noop
 				: () => {
 						deleteToast();
-						//   toast.onDismiss?.(toast);
+						toast.onDismiss?.(toast);
 				  }}
 		>
 			<svg
