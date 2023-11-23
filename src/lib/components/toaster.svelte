@@ -37,16 +37,16 @@
 			  : 'light';
 	}
 
-	function getDocumentDirection(): ToasterProps['dir'] {
+	function getDocumentDirection(): Direction {
 		if (typeof window === 'undefined') return 'ltr';
 
 		const dirAttribute = document.documentElement.getAttribute('dir');
 
 		if (dirAttribute === 'auto' || !dirAttribute) {
-			return window.getComputedStyle(document.documentElement).direction as ToasterProps['dir'];
+			return window.getComputedStyle(document.documentElement).direction as Direction;
 		}
 
-		return dirAttribute as ToasterProps['dir'];
+		return dirAttribute as Direction;
 	}
 </script>
 
@@ -67,17 +67,17 @@
 
 	export let position: ToasterProps['position'] = 'bottom-right';
 	export let hotkey: ToasterProps['hotkey'] = ['altKey', 'KeyT'];
-	export let expand: ToasterProps['expand'] | undefined = undefined;
-	export let offset: ToasterProps['offset'] | undefined = undefined;
+	export let expand: ToasterProps['expand'] = false;
+	export let offset: ToasterProps['offset'] = VIEWPORT_OFFSET;
 	export let theme: ToasterProps['theme'] = 'light';
 	export let visibleToasts: ToasterProps['visibleToasts'] = VISIBLE_TOASTS_AMOUNT;
 	export let dir: ToasterProps['dir'] = getDocumentDirection();
-	export let richColors: ToasterProps['richColors'] | undefined = undefined;
-	export let invert: ToasterProps['invert'] | undefined = undefined;
+	export let richColors: ToasterProps['richColors'] = false;
+	export let invert: ToasterProps['invert'] = false;
 	export let duration: ToasterProps['duration'] = TOAST_LIFETIME;
 	export let closeButton: ToasterProps['closeButton'] = false;
 	export let gap: ToasterProps['gap'] = GAP;
-	export let portalElement: ToasterProps['portal'] | undefined = undefined;
+	export let portalElement: ToasterProps['portal'] = 'body';
 	export { portalElement as portal };
 
 	let listRef: HTMLOListElement | null;
@@ -239,7 +239,7 @@
 				on:pointerup={() => (interacting = false)}
 				style="
 				--front-toast-height: {$heights[0]?.height}px;
-				--offset: {typeof offset === 'number' ? `${offset}px` : offset || VIEWPORT_OFFSET};
+				--offset: {typeof offset === 'number' ? `${offset}px` : offset};
 				--width: {TOAST_WIDTH}px;
 				--gap: {GAP}px;
 				"
