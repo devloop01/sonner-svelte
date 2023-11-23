@@ -46,6 +46,7 @@ export interface Toast<T extends RecordT = RecordT> {
 	delete?: boolean;
 	component?: Component<T>;
 	props?: Omit<T, 'toast'>;
+	unstyled?: boolean;
 
 	action?: {
 		label: string;

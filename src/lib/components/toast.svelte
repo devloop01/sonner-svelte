@@ -172,7 +172,7 @@
 	role="status"
 	class=""
 	data-sonner-sv-toast
-	data-styled={!toast.component}
+	data-styled={!Boolean(toast.component || toast.unstyled)}
 	data-mounted={mounted}
 	data-promise={!!toast.promise}
 	data-removed={removed}
