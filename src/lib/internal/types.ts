@@ -79,6 +79,7 @@ export type PromiseToastOptions<T = unknown> = ToastOptions & {
 	loading: Renderable;
 	success: ValueOrFunction<Renderable, T>;
 	error: ValueOrFunction<Renderable, unknown>;
+	finally?: () => void | Promise<void>;
 };
 
 export interface ToasterContext {}

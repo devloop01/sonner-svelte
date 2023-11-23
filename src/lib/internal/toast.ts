@@ -54,6 +54,7 @@ toast.success = createHandler('success');
 toast.error = createHandler('error');
 
 toast.custom = <T extends RecordT = RecordT>(component: Component<T>, opts?: ToastOptions<T>) =>
+	// @ts-expect-error component does not exist
 	createHandler('custom')(component, { ...opts, component });
 
 toast.dismiss = (toastId?: string) => dismissToast(toastId);
@@ -62,15 +63,20 @@ toast.remove = (toastId?: string) => removeToast(toastId);
 toast.promise = <T>(promise: PromiseT<T>, opts?: PromiseToastOptions<T>) => {
 	if (!opts) return;
 
+	// @ts-expect-error promise does not exist
 	const id = toast.loading(opts.loading, { ...opts, promise });
 	const p = resolveValue(promise, undefined);
 
 	p.then((res) => {
 		toast.success(resolveValue(opts.success, res), { id, ...opts });
 		return res;
-	}).catch((e) => {
-		toast.error(resolveValue(opts.error, e), { id, ...opts });
-	});
+	})
+		.catch((e) => {
+			toast.error(resolveValue(opts.error, e), { id, ...opts });
+		})
+		.finally(() => {
+			opts.finally?.();
+		});
 
 	return promise;
 };
