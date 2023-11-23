@@ -100,7 +100,8 @@
 		};
 	});
 
-	$: toast.delete && deleteToast();
+	// if toast is dismissed, remove it
+	$: toast.dismiss && deleteToast();
 
 	const deleteToast = () => {
 		// Save the offset for the exit swipe animation

@@ -43,7 +43,7 @@ export interface Toast<T extends RecordT = RecordT> {
 	closeDelay: number;
 	timeout: ReturnType<typeof setTimeout> | null;
 	pausedAt?: number;
-	delete?: boolean;
+	dismiss?: boolean;
 	component?: Component<T>;
 	props?: Omit<T, 'toast'>;
 	unstyled?: boolean;

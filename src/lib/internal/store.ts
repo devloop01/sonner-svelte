@@ -27,10 +27,8 @@ export const upsertToast = (toast: Toast) => {
 
 export const dismissToast = (toastId?: string) => {
 	toasts.update(($toasts) => {
-		if (toastId) addToastToRemoveQueue(toastId);
-		else $toasts.forEach((toast) => addToastToRemoveQueue(toast.id));
 		return $toasts.map((t) =>
-			t.id === toastId || toastId === undefined ? { ...t, delete: true } : t
+			t.id === toastId || toastId === undefined ? { ...t, dismiss: true } : t
 		);
 	});
 };
