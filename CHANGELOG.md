@@ -1,5 +1,19 @@
 # sonner-svelte
 
+## 0.2.3
+
+### Patch Changes
+
+- feat: default export `toast` method ([`ccfe5e5`](https://github.com/devloop01/sonner-svelte/commit/ccfe5e593a579ebaee81d169a195fb21d7f7ff37))
+
+- fix: custom gap `:hover` glitch ([`055806f`](https://github.com/devloop01/sonner-svelte/commit/055806f9edec1427dde97697cfc1919a03485348))
+
+- feat: add `loadingIcon` prop ([`4f0d124`](https://github.com/devloop01/sonner-svelte/commit/4f0d1244210b7d4a2a682f94f01ca6790b0783e9))
+
+- fix: `<Toaster />` prop defaults ([`160942f`](https://github.com/devloop01/sonner-svelte/commit/160942f8f1138ce5811343ccac9cfcd33b21363d))
+
+- feat: add `unstyled` toast option ([`ba776c3`](https://github.com/devloop01/sonner-svelte/commit/ba776c3b0c22b3ae88580a4ae040956875e1759a))
+
 ## 0.2.2
 
 ### Patch Changes
