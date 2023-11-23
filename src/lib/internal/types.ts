@@ -29,10 +29,10 @@ export type PromiseT<T = unknown> = ValueOrFunction<Promise<T>, void>;
 export interface Toast<T extends RecordT = RecordT> {
 	id: string;
 	type?: ToastType;
-	title: Renderable<T>;
-	description?: Renderable<T>;
+	title: Renderable;
+	description?: Renderable;
 	createdAt: number;
-	icon?: Component<T>;
+	icon?: Component;
 	duration: number;
 	position?: ToastPosition;
 	invert?: boolean;
