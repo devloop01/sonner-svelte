@@ -6,8 +6,7 @@ export { toast, Toaster };
 export type {
 	ToastType,
 	ToastPosition,
-	Toast,
-	ToastOptions,
+	ToastOptions as Toast,
 	Theme as ToastTheme,
 	Direction as ToastDirection
 } from './internal/types.js';
