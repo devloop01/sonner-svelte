@@ -1,5 +1,6 @@
 <script lang="ts" context="module">
 	import type {
+		Component,
 		Direction,
 		Theme,
 		ToastOptions,
@@ -24,7 +25,7 @@
 		portal: HTMLElement | string | null;
 		// className: string;
 		// style: string;
-		// loadingIcon: Renderable;
+		loadingIcon: Component;
 	}
 
 	function getActualTheme(theme: string) {
@@ -58,8 +59,7 @@
 		VIEWPORT_OFFSET,
 		TOAST_WIDTH,
 		GAP,
-		VISIBLE_TOASTS_AMOUNT,
-		TOAST_LIFETIME
+		VISIBLE_TOASTS_AMOUNT
 	} from '$lib/internal/constants.js';
 	import { toasts, heights, dismissToast } from '$lib/internal/store.js';
 	import { portal } from '$lib/internal/actions/portal.js';
@@ -74,11 +74,13 @@
 	export let dir: ToasterProps['dir'] = getDocumentDirection();
 	export let richColors: ToasterProps['richColors'] = false;
 	export let invert: ToasterProps['invert'] = false;
-	export let duration: ToasterProps['duration'] = TOAST_LIFETIME;
+	export let duration: ToasterProps['duration'] | undefined = undefined;
 	export let closeButton: ToasterProps['closeButton'] = false;
 	export let gap: ToasterProps['gap'] = GAP;
 	export let portalElement: ToasterProps['portal'] = 'body';
 	export { portalElement as portal };
+	export let loadingIcon: ToasterProps['loadingIcon'] | undefined = undefined;
+	export let toastOptions: ToasterProps['toastOptions'] = {};
 
 	let listRef: HTMLOListElement | null;
 
@@ -248,7 +250,7 @@
 					<Toast
 						{index}
 						{toast}
-						{duration}
+						duration={toastOptions?.duration ?? duration}
 						{invert}
 						{visibleToasts}
 						{closeButton}
@@ -257,6 +259,7 @@
 						expandByDefault={expand}
 						{gap}
 						{expanded}
+						{loadingIcon}
 					/>
 				{/each}
 			</ol>

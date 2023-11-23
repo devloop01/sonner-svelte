@@ -1,40 +1,42 @@
 <script lang="ts" context="module">
-	import type { Toast, ToastPosition } from '$lib/internal/types.js';
+	import type { Component, Toast, ToastPosition } from '$lib/internal/types.js';
 
 	interface ToastProps {
 		index: number;
 		toast: Toast;
+		expanded: boolean;
+		invert: boolean;
+		gap: number;
 		position: ToastPosition;
 		visibleToasts: number;
 		expandByDefault: boolean;
-		gap: number;
-		expanded: boolean;
-		invert: boolean;
-		duration: number;
 		closeButton: boolean;
 		interacting: boolean;
+		duration: number;
+		loadingIcon: Component;
 	}
 </script>
 
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { toasts, heights, addToastToRemoveQueue, dismissToast } from '$lib/internal/store.js';
-	import { SWIPE_THRESHOLD } from '$lib/internal/constants.js';
+	import { SWIPE_THRESHOLD, TOAST_LIFETIME } from '$lib/internal/constants.js';
 	import { noop } from '$lib/internal/utils.js';
 	import { LoaderIcon, getIcon } from './icons/index.js';
 
-	export let toast: ToastProps['toast'];
-	export let position: ToastProps['position'];
 	export let index: ToastProps['index'];
-	export let visibleToasts: ToastProps['visibleToasts'];
-	export let expandByDefault: ToastProps['expandByDefault'] | undefined = undefined;
-	export let gap: ToastProps['gap'];
+	export let toast: ToastProps['toast'];
 	export let expanded: ToastProps['expanded'] = false;
 	let toastInvert: ToastProps['invert'] | undefined = undefined;
 	export { toastInvert as invert };
-	export let duration: ToastProps['duration'];
+	export let gap: ToastProps['gap'];
+	export let position: ToastProps['position'];
+	export let visibleToasts: ToastProps['visibleToasts'];
+	export let expandByDefault: ToastProps['expandByDefault'] | undefined = undefined;
 	export let closeButton: ToastProps['closeButton'];
 	export let interacting: ToastProps['interacting'];
+	export let duration: ToastProps['duration'] = TOAST_LIFETIME;
+	export let loadingIcon: ToastProps['loadingIcon'] | undefined = undefined;
 
 	let toastRef: HTMLLIElement | null;
 
@@ -232,9 +234,16 @@
 		<svelte:component this={toast.title} {...toast.props} {toast} />
 	{:else}
 		{#if toastType || toast.icon || toast.promise}
+			{@const isLoading = toastType === 'loading'}
 			<div data-icon>
-				{#if toast.promise || toastType === 'loading'}
-					<LoaderIcon visible={toastType === 'loading'} />
+				{#if toast.promise || isLoading}
+					{#if loadingIcon}
+						<div class="loader" data-visible={isLoading}>
+							<svelte:component this={loadingIcon} />
+						</div>
+					{:else}
+						<LoaderIcon visible={isLoading} />
+					{/if}
 				{/if}
 				<svelte:component this={toast.icon ?? getIcon(toastType)} />
 			</div>
