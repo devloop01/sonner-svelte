@@ -307,7 +307,7 @@ html[dir='rtl'],
 	content: '';
 	position: absolute;
 	left: 0;
-	height: calc(var(--gap) + 1px);
+	height: calc(var(--gap-between) + 1px);
 	bottom: 100%;
 	width: 100%;
 }

@@ -194,6 +194,7 @@
 		--z-index: {$toasts.length - index};
 		--offset: {removed ? offsetBeforeRemove : offset}px;
 		--initial-height: {expandByDefault ? 'auto' : `${initialHeight}px`};
+		--gap-between: {gap}px;
 	"
 >
 	{#if closeButton}
