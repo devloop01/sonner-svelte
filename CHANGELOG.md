@@ -1,5 +1,23 @@
 # sonner-svelte
 
+## 0.2.5
+
+### Patch Changes
+
+- feat: add other styling related markup and props i.e. `classNames`, `style` etc. ([`4826eca`](https://github.com/devloop01/sonner-svelte/commit/4826ecadd2a1360fe250bfc556e2b5869c3c288c))
+
+- fix: remove `props` from `ToastOptions` type ([`dbb1a22`](https://github.com/devloop01/sonner-svelte/commit/dbb1a2292cf1944f01b2c5214ea6a5f6c6cdee12))
+
+- chore: remove type `ToastOptions` from package export ([`91bcecf`](https://github.com/devloop01/sonner-svelte/commit/91bcecfb77ca35b5c04f6be615e2947f527deb9f))
+
+- feat: add `className`, `style` prop in `<Toaster />` ([`5e38493`](https://github.com/devloop01/sonner-svelte/commit/5e38493f72f14d1965a1805e7e56d2870d60c134))
+
+- fix: loading toast duration ([`606d563`](https://github.com/devloop01/sonner-svelte/commit/606d563bc6810b319b4f2fc561ab467c0e46ac7d))
+
+- feat: export types - `ToastOptions`, `ToastTheme`, `ToastDirection` from package ([`fe715e4`](https://github.com/devloop01/sonner-svelte/commit/fe715e47b1c9b82c3b41b5f3f51dd303413da4fe))
+
+- fix: `Toast` types ([`1119972`](https://github.com/devloop01/sonner-svelte/commit/1119972dcc7169077430330ca47f10f2c003a300))
+
 ## 0.2.4
 
 ### Patch Changes
