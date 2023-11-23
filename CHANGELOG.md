@@ -1,5 +1,11 @@
 # sonner-svelte
 
+## 0.2.6
+
+### Patch Changes
+
+- fix: replace `classix` utility ([`4f51196`](https://github.com/devloop01/sonner-svelte/commit/4f511961a3f04489d43e31a7b78b107aa1fa3147))
+
 ## 0.2.5
 
 ### Patch Changes
