@@ -1,6 +1,13 @@
 import { toast } from './internal/toast.js';
 import Toaster from './components/toaster.svelte';
 
-export type { ToastType, ToastPosition, Toast } from './internal/types.js';
-export { toast, Toaster };
 export default toast;
+export { toast, Toaster };
+export type {
+	ToastType,
+	ToastPosition,
+	Toast,
+	ToastOptions,
+	Theme as ToastTheme,
+	Direction as ToastDirection
+} from './internal/types.js';
