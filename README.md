@@ -39,7 +39,7 @@ yarn add sonner-svelte
 
 ```svelte
 <script>
-import { toast, Toaster } from 'sonner-svelte';
+ import { toast, Toaster } from 'sonner-svelte';
 </script>
 
 <Toaster />
@@ -52,7 +52,7 @@ For more examples, check out the [website](https://sonner-svelte.vercel.app)
 
 The api is similar to the react version, with a few differences
 
-### Differences from react version
+### Custom toast
 
 In the react version, custom toast components are passed as `jsx` elements, but in svelte, we can't do that. So, we pass the component as a `SvelteComponent` instead. It maintains the default styling.
 
@@ -61,7 +61,7 @@ If you want to create unstyled toast you need to create headless toast.
 ```svelte
 <!-- CustomToast.svelte -->
 <script>
-export let message;
+ export let message;
 </script>
 
 <p>This is a custom Component</p>
@@ -69,38 +69,39 @@ export let message;
 
 ```svelte
 <script>
-    import { toast, Toaster } from 'sonner-svelte';
-    import CustomToast from './CustomToast.svelte';
+ import { toast, Toaster } from 'sonner-svelte';
+ import CustomToast from './CustomToast.svelte';
 </script>
 
 <Toaster />
 <button on:click={() => toast(CustomToast)}>Render toast</button>
 ```
 
+### Headless toast (unstyled)
+
 Similarly, when you want to create a custom headless (unstyled) toast, you need to pass the component as a `SvelteComponent` instead of a `jsx` element and its corresponding props as an object.
 
 ```svelte
 <!-- HeadlessToast.svelte -->
 <script>
-    import _toast from 'sonner-svelte';
-    export let event;
-    export let toast; // this is available when you pass a custom component. You don't need to pass it manually
+ import _toast from 'sonner-svelte';
+ export let event;
+ export let toast; 
+ // toast is available when you pass a custom component. You don't need to pass it manually
 </script>
 
 <p>Created event: {event}!</p>
-<button on:click={() => _toast.dismiss(toast.id)}>
-    close
-</button>
+<button on:click={() => _toast.dismiss(toast.id)}> close </button>
 ```
 
 ```svelte
 <script>
-import { toast, Toaster } from 'sonner-svelte';
-import HeadlessToast from './HeadlessToast.svelte';
+ import { toast, Toaster } from 'sonner-svelte';
+ import HeadlessToast from './HeadlessToast.svelte';
 
-const handleClick = () => {
-    toast.custom(HeadlessToast, { props: { event: 'Louvre Museum' } })
-}
+ const handleClick = () => {
+  toast.custom(HeadlessToast, { props: { event: 'Louvre Museum' } });
+ };
 </script>
 
 <Toaster />
