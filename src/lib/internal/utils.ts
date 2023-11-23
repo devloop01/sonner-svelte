@@ -21,3 +21,7 @@ export const resolveValue = <TValue, TArg>(
 export const isHTMLElement = (el: unknown): el is HTMLElement => el instanceof HTMLElement;
 
 export const noop = () => {};
+
+export function cn(...classes: (string | undefined)[]) {
+	return classes.filter(Boolean).join(' ');
+}

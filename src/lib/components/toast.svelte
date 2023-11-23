@@ -24,10 +24,9 @@
 
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { cx } from 'classix';
 	import { toasts, heights, addToastToRemoveQueue, dismissToast } from '$lib/internal/store.js';
 	import { SWIPE_THRESHOLD } from '$lib/internal/constants.js';
-	import { noop } from '$lib/internal/utils.js';
+	import { noop, cn } from '$lib/internal/utils.js';
 	import { LoaderIcon, getIcon } from './icons/index.js';
 
 	export let index: ToastProps['index'];
@@ -189,7 +188,7 @@
 	aria-live={toast.important ? 'assertive' : 'polite'}
 	aria-atomic="true"
 	role="status"
-	class={cx(
+	class={cn(
 		className,
 		toast.className,
 		classNames?.toast,
@@ -233,7 +232,7 @@
 			aria-label="Close toast"
 			data-disabled={disabled}
 			data-close-button
-			class={cx(classNames.closeButton, toast.classNames?.closeButton)}
+			class={cn(classNames.closeButton, toast.classNames?.closeButton)}
 			on:click={disabled || !dismissible
 				? noop
 				: () => {
@@ -269,7 +268,7 @@
 				{#if toast.promise || isLoading}
 					{#if loadingIcon}
 						<div
-							class={cx('loader', classNames.loader, toast.classNames?.loader)}
+							class={cn('loader', classNames.loader, toast.classNames?.loader)}
 							data-visible={isLoading}
 						>
 							<svelte:component this={loadingIcon} />
@@ -283,13 +282,13 @@
 		{/if}
 
 		<div data-content>
-			<span data-title class={cx(classNames.title, toast.classNames?.title)}>
+			<span data-title class={cn(classNames.title, toast.classNames?.title)}>
 				{toast.title}
 			</span>
 			{#if toast.description}
 				<span
 					data-description
-					class={cx(
+					class={cn(
 						descriptionClassName,
 						toast.descriptionClassName,
 						classNames.description,
@@ -306,7 +305,7 @@
 				data-button
 				data-cancel
 				style={cancelButtonStyle}
-				class={cx(classNames.cancelButton, toast.classNames?.cancelButton)}
+				class={cn(classNames.cancelButton, toast.classNames?.cancelButton)}
 				on:click={() => {
 					if (!dismissible) return;
 					deleteToast();
@@ -321,7 +320,7 @@
 			<button
 				data-button
 				style={actionButtonStyle}
-				class={cx(classNames.actionButton, toast.classNames?.actionButton)}
+				class={cn(classNames.actionButton, toast.classNames?.actionButton)}
 				on:click={(event) => {
 					toast.action?.onClick(event);
 					if (event.defaultPrevented) return;
