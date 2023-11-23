@@ -2,4 +2,4 @@
 'sonner-svelte': patch
 ---
 
-fix: remove `props` from `ToastOptions`` type
+fix: remove `props` from `ToastOptions` type
