@@ -23,8 +23,8 @@
 		closeButton: boolean;
 		toastOptions: ToastOptions;
 		portal: HTMLElement | string | null;
-		// className: string;
-		// style: string;
+		className: string;
+		style: string;
 		loadingIcon: Component;
 	}
 
@@ -81,6 +81,9 @@
 	export { portalElement as portal };
 	export let loadingIcon: ToasterProps['loadingIcon'] | undefined = undefined;
 	export let toastOptions: ToasterProps['toastOptions'] = {};
+	let className: ToasterProps['className'] = '';
+	export { className as class };
+	export let style: ToasterProps['style'] = '';
 
 	let listRef: HTMLOListElement | null;
 
@@ -224,7 +227,7 @@
 				bind:this={listRef}
 				tabindex={-1}
 				dir={dir === 'auto' ? getDocumentDirection() : dir}
-				class={''}
+				class={className}
 				data-sonner-sv-toaster
 				data-theme={actualTheme}
 				data-rich-colors={richColors}
@@ -244,6 +247,7 @@
 				--offset: {typeof offset === 'number' ? `${offset}px` : offset};
 				--width: {TOAST_WIDTH}px;
 				--gap: {GAP}px;
+				{style}
 				"
 			>
 				{#each filteredToasts as toast, index (toast.id)}
