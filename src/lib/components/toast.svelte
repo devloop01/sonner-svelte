@@ -11,7 +11,6 @@
 		visibleToasts: number;
 		expandByDefault: boolean;
 		closeButton: boolean;
-		interacting: boolean;
 		duration: number;
 		loadingIcon: Component;
 	}
@@ -34,7 +33,6 @@
 	export let visibleToasts: ToastProps['visibleToasts'];
 	export let expandByDefault: ToastProps['expandByDefault'] | undefined = undefined;
 	export let closeButton: ToastProps['closeButton'];
-	export let interacting: ToastProps['interacting'];
 	export let duration: ToastProps['duration'] | undefined = undefined;
 	export let loadingIcon: ToastProps['loadingIcon'] | undefined = undefined;
 

@@ -254,7 +254,6 @@
 						{invert}
 						{visibleToasts}
 						{closeButton}
-						{interacting}
 						{position}
 						expandByDefault={expand}
 						{gap}
