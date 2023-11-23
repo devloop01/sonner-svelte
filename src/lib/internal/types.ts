@@ -33,14 +33,13 @@ export interface Toast<T extends RecordT = RecordT> {
 	description?: Renderable<T>;
 	createdAt: number;
 	icon?: Component<T>;
-	duration?: number;
+	duration: number;
 	position?: ToastPosition;
 	invert?: boolean;
 	dismissible?: boolean;
 	important?: boolean;
 	promise?: PromiseT;
 	pauseDuration: number;
-	closeDelay: number;
 	timeout: ReturnType<typeof setTimeout> | null;
 	pausedAt?: number;
 	dismiss?: boolean;

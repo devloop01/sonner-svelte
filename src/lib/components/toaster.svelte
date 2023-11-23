@@ -138,7 +138,7 @@
 	const startPause = () => {
 		toasts.update(($toasts) => {
 			return $toasts.map((toast) => {
-				if (toast.closeDelay !== Infinity || toast.closeDelay !== 0) {
+				if (toast.duration !== Infinity || toast.duration !== 0) {
 					if (toast.timeout !== null) {
 						clearTimeout(toast.timeout);
 					}
@@ -153,10 +153,10 @@
 	const endPause = () => {
 		toasts.update(($toasts) => {
 			return $toasts.map((toast) => {
-				if (toast.closeDelay !== Infinity || toast.closeDelay !== 0) {
+				if (toast.duration !== Infinity || toast.duration !== 0) {
 					const pausedAt = toast.pausedAt ?? toast.createdAt;
 					const elapsed = pausedAt - toast.createdAt - toast.pauseDuration;
-					const remaining = toast.closeDelay - elapsed;
+					const remaining = toast.duration - elapsed;
 
 					toast.timeout = setTimeout(() => {
 						dismissToast(toast.id);
@@ -250,7 +250,7 @@
 					<Toast
 						{index}
 						{toast}
-						duration={toastOptions?.duration ?? duration}
+						duration={toastOptions?.duration || duration}
 						{invert}
 						{visibleToasts}
 						{closeButton}

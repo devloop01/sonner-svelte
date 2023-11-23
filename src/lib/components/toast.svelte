@@ -20,7 +20,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { toasts, heights, addToastToRemoveQueue, dismissToast } from '$lib/internal/store.js';
-	import { SWIPE_THRESHOLD, TOAST_LIFETIME } from '$lib/internal/constants.js';
+	import { SWIPE_THRESHOLD } from '$lib/internal/constants.js';
 	import { noop } from '$lib/internal/utils.js';
 	import { LoaderIcon, getIcon } from './icons/index.js';
 
@@ -35,7 +35,7 @@
 	export let expandByDefault: ToastProps['expandByDefault'] | undefined = undefined;
 	export let closeButton: ToastProps['closeButton'];
 	export let interacting: ToastProps['interacting'];
-	export let duration: ToastProps['duration'] = TOAST_LIFETIME;
+	export let duration: ToastProps['duration'] | undefined = undefined;
 	export let loadingIcon: ToastProps['loadingIcon'] | undefined = undefined;
 
 	let toastRef: HTMLLIElement | null;
@@ -89,11 +89,11 @@
 		});
 
 		toast.timeout =
-			toast.closeDelay === 0
+			toast.duration === 0 || toast.duration === Infinity
 				? null
 				: setTimeout(() => {
 						dismissToast(toast.id);
-				  }, toast.closeDelay);
+				  }, duration || toast.duration);
 
 		return () => {
 			toast.timeout && clearTimeout(toast.timeout);

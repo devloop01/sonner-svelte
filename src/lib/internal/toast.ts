@@ -24,14 +24,14 @@ const createToast = <T extends RecordT = RecordT>(
 	type?: ToastType,
 	opts?: ToastOptions<T>
 ): Toast<T> => ({
+	...opts,
 	type,
 	title: message,
 	createdAt: Date.now(),
 	pauseDuration: 0,
+	duration: opts?.duration || TOAST_LIFETIME,
 	timeout: null,
-	closeDelay: TOAST_LIFETIME,
 	dismissible: opts?.dismissible || true,
-	...opts,
 	id: opts?.id || genId()
 });
 
@@ -39,7 +39,7 @@ const createHandler =
 	(type?: ToastType): ToastHandler =>
 	(message, options) => {
 		const toast = createToast(message, type, options);
-		upsertToast(toast);
+		upsertToast(toast as Toast<RecordT>);
 		return toast.id;
 	};
 
