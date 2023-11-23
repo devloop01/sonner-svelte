@@ -38,6 +38,8 @@
 				<button
 					type="button"
 					role="tab"
+					aria-label={installer.name}
+					aria-selected={isActive}
 					data-active={isActive || undefined}
 					on:click={() => (currentInstaller = installer)}
 				>

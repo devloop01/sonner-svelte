@@ -94,5 +94,5 @@ toast.custom(HeadlessToast, {
 <section>
 	<h2>Other</h2>
 
-	<CodeExample {examples} language="js" />
+	<CodeExample {examples} />
 </section>
