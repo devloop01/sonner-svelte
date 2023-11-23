@@ -88,17 +88,21 @@
 			}
 		});
 
-		toast.timeout =
-			toast.duration === 0 || toast.duration === Infinity
-				? null
-				: setTimeout(() => {
-						dismissToast(toast.id);
-				  }, duration || toast.duration);
-
 		return () => {
 			toast.timeout && clearTimeout(toast.timeout);
 		};
 	});
+
+	$: {
+		if (mounted) {
+			toast.timeout =
+				toast.duration === 0 || toast.duration === Infinity
+					? null
+					: setTimeout(() => {
+							dismissToast(toast.id);
+					  }, duration || toast.duration);
+		}
+	}
 
 	// if toast is dismissed, remove it
 	$: toast.dismiss && deleteToast();

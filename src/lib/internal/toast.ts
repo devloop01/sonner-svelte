@@ -24,7 +24,6 @@ const createToast = <T extends RecordT = RecordT>(
 	type?: ToastType,
 	opts?: ToastOptions<T>
 ): Toast<T> => ({
-	...opts,
 	type,
 	title: message,
 	createdAt: Date.now(),
@@ -32,13 +31,15 @@ const createToast = <T extends RecordT = RecordT>(
 	duration: opts?.duration || TOAST_LIFETIME,
 	timeout: null,
 	dismissible: opts?.dismissible || true,
-	id: opts?.id || genId()
+	id: opts?.id || genId(),
+	...opts
 });
 
 const createHandler =
 	(type?: ToastType): ToastHandler =>
 	(message, options) => {
 		const toast = createToast(message, type, options);
+		console.log(toast.duration);
 		upsertToast(toast as Toast<RecordT>);
 		return toast.id;
 	};
@@ -64,7 +65,7 @@ toast.promise = <T>(promise: PromiseT<T>, opts?: PromiseToastOptions<T>) => {
 	if (!opts) return;
 
 	// @ts-expect-error promise does not exist
-	const id = toast.loading(opts.loading, { ...opts, promise });
+	const id = toast.loading(opts.loading, { ...opts, duration: 0, promise });
 	const p = resolveValue(promise, undefined);
 
 	p.then((res) => {
