@@ -1,5 +1,21 @@
 # sonner-svelte
 
+## 0.2.4
+
+### Patch Changes
+
+- fix: `ToastOptions` type ([`a02ea25`](https://github.com/devloop01/sonner-svelte/commit/a02ea2548f4dc524a63c45f2335dd31ee06339f4))
+
+- chore: replace `closeDelay` with `duration` ([`3f6fe05`](https://github.com/devloop01/sonner-svelte/commit/3f6fe059cd2dc82e74f823b088a9408baf5b15d6))
+
+- feat: add `onDismiss` & `onAutoClose` method options ([`6f78203`](https://github.com/devloop01/sonner-svelte/commit/6f78203a548f0c21a40a9239780a74255c96e64a))
+
+- fix: remove `data-dismissible` from `<Toaster />` ([`01650d5`](https://github.com/devloop01/sonner-svelte/commit/01650d5fe3a27bc901e134a31d62f930cbd11b52))
+
+- feat: add `finally` option in `toast.promise` ([`06aeda5`](https://github.com/devloop01/sonner-svelte/commit/06aeda5aa8971df7efe4bd06c66bfad98de80509))
+
+- chore: rename `delete` option to `dismiss` ([`f7ac37f`](https://github.com/devloop01/sonner-svelte/commit/f7ac37fd03ff0197f3dd4eab89c5c9cab7d91004))
+
 ## 0.2.3
 
 ### Patch Changes
