@@ -265,6 +265,7 @@
 						{loadingIcon}
 						class={toastOptions.className}
 						descriptionClassName={toastOptions.descriptionClassName}
+						classNames={toastOptions.classNames}
 						style={toastOptions.style}
 						actionButtonStyle={toastOptions.actionButtonStyle}
 						cancelButtonStyle={toastOptions.cancelButtonStyle}
