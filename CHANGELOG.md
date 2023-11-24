@@ -1,5 +1,11 @@
 # sonner-svelte
 
+## 0.2.7
+
+### Patch Changes
+
+- fix: toastOptions `classNames` not applying ([`d834640`](https://github.com/devloop01/sonner-svelte/commit/d834640e0351085a9708b39adde7c68434c11ff2))
+
 ## 0.2.6
 
 ### Patch Changes
