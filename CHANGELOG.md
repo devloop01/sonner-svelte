@@ -1,5 +1,11 @@
 # sonner-svelte
 
+## 0.3.0
+
+### Minor Changes
+
+- feat: rename `class` props. eg. `className` &rarr; `class` & `classNames` &rarr; `classes` ([#25](https://github.com/devloop01/sonner-svelte/pull/25))
+
 ## 0.2.7
 
 ### Patch Changes
