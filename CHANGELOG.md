@@ -1,5 +1,11 @@
 # sonner-svelte
 
+## 0.3.3
+
+### Patch Changes
+
+- fix: toast not staying when interacting ([#34](https://github.com/devloop01/sonner-svelte/pull/34))
+
 ## 0.3.2
 
 ### Patch Changes
