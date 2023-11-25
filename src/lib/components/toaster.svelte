@@ -141,10 +141,8 @@
 	const startPause = () => {
 		toasts.update(($toasts) => {
 			return $toasts.map((toast) => {
-				if (toast.duration !== Infinity || toast.duration !== 0) {
-					if (toast.timeout !== null) {
-						clearTimeout(toast.timeout);
-					}
+				if (toast.duration !== Infinity) {
+					if (toast.timeout !== null) clearTimeout(toast.timeout);
 					toast.pausedAt = Date.now();
 				}
 
@@ -156,7 +154,7 @@
 	const endPause = () => {
 		toasts.update(($toasts) => {
 			return $toasts.map((toast) => {
-				if (toast.duration !== Infinity || toast.duration !== 0) {
+				if (toast.duration !== Infinity) {
 					const pausedAt = toast.pausedAt ?? toast.createdAt;
 					const elapsed = pausedAt - toast.createdAt - toast.pauseDuration;
 					const remaining = toast.duration - elapsed;

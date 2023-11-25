@@ -109,7 +109,7 @@
 	$: {
 		if (mounted) {
 			toast.timeout =
-				toast.duration === 0 || toast.duration === Infinity
+				toast.duration === Infinity
 					? null
 					: setTimeout(() => {
 							dismissToast(toast.id);
