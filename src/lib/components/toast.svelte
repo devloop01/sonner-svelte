@@ -61,6 +61,7 @@
 	$: dismissible = toast.dismissible !== false;
 	$: invert = toast.invert || toastInvert;
 	$: disabled = toast.type === 'loading';
+	$: toastDuration = toast.duration;
 
 	let initialHeight = 0;
 	let offsetBeforeRemove = 0;
@@ -105,18 +106,19 @@
 		};
 	});
 
-	$: {
-		// this ensures that when toast is updated with a new duration, we update the timeout
-		// happens when toast state changes from loading to success/error
-		if (mounted) {
-			toast.timeout =
-				toast.duration === Infinity
-					? null
-					: setTimeout(() => {
-							dismissToast(toast.id);
-					  }, duration || toast.duration);
-		}
-	}
+	const setToastTimeout = () => {
+		toast.timeout =
+			toast.duration === Infinity
+				? null
+				: setTimeout(() => {
+						dismissToast(toast.id);
+				  }, duration || toast.duration);
+	};
+
+	// separate function so the $ does not subscibe to other changes
+	// this ensures that when toast is updated with a new duration, we update the timeout
+	// happens when toast state changes from loading to success/error
+	$: setToastTimeout(), toastDuration;
 
 	// if toast is dismissed, remove it
 	$: toast.dismiss && deleteToast();
