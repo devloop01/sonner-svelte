@@ -67,7 +67,7 @@ toast.promise = <T>(promise: PromiseT<T>, opts?: PromiseToastOptions<T>) => {
 	if (!opts) return;
 
 	// @ts-expect-error promise does not exist
-	const id = toast.loading(opts.loading, { ...opts, duration: 0, promise });
+	const id = toast.loading(opts.loading, { ...opts, duration: Infinity, promise });
 	const p = resolveValue(promise, undefined);
 
 	p.then((res) => {
