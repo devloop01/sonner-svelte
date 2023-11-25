@@ -100,17 +100,23 @@
 			}
 		});
 
-		toast.timeout =
-			toast.duration === Infinity
-				? null
-				: setTimeout(() => {
-						dismissToast(toast.id);
-				  }, duration || toast.duration);
-
 		return () => {
 			toast.timeout && clearTimeout(toast.timeout);
 		};
 	});
+
+	$: {
+		// this ensures that when toast is updated with a new duration, we update the timeout
+		// happens when toast state changes from loading to success/error
+		if (mounted) {
+			toast.timeout =
+				toast.duration === Infinity
+					? null
+					: setTimeout(() => {
+							dismissToast(toast.id);
+					  }, duration || toast.duration);
+		}
+	}
 
 	// if toast is dismissed, remove it
 	$: toast.dismiss && deleteToast();
