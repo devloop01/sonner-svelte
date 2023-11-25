@@ -7,7 +7,7 @@
 		Position,
 		Expand as ExpandModes,
 		Other
-	} from '@/components/sections';
+	} from '@/components/examples';
 
 	import type { ToastTheme, ToastPosition } from '$lib';
 	import { Toaster } from '$lib';

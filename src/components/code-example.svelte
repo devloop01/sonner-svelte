@@ -1,7 +1,7 @@
 <script lang="ts">
 	import autoAnimate from '@formkit/auto-animate';
 	import CodeBlock from '@/components/code-block.svelte';
-	import type { Example } from './sections';
+	import type { Example } from './examples';
 
 	export let examples: Example[];
 	export let language = 'svelte';
