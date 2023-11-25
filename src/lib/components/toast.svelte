@@ -27,8 +27,7 @@
 	import { toasts, heights, addToastToRemoveQueue, dismissToast } from '$lib/internal/store.js';
 	import { SWIPE_THRESHOLD } from '$lib/internal/constants.js';
 	import { noop, cn } from '$lib/internal/utils.js';
-	import Icon from './icon.svelte';
-	import LoaderIcon from './loader.svelte';
+	import { LoaderIcon, getIcon } from './icons/index.js';
 
 	export let index: ToastProps['index'];
 	export let toast: ToastProps['toast'];
@@ -255,7 +254,7 @@
 	{#if toast.component}
 		<svelte:component this={toast.component} {...toast.props} {toast} />
 	{:else if typeof toast.title !== 'string'}
-		<svelte:component this={toast.title} {...toast.props} />
+		<svelte:component this={toast.title} {...toast.props} {toast} />
 	{:else}
 		{#if toastType || toast.icon || toast.promise}
 			{@const isLoading = toastType === 'loading'}
@@ -272,12 +271,7 @@
 						<LoaderIcon visible={isLoading} />
 					{/if}
 				{/if}
-
-				{#if toast.icon}
-					<svelte:component this={toast.icon} />
-				{:else}
-					<Icon type={toastType} />
-				{/if}
+				<svelte:component this={toast.icon ?? getIcon(toastType)} />
 			</div>
 		{/if}
 
