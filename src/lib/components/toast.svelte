@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	import type { Component, Toast, ToastClassnames, ToastPosition } from '$lib/internal/types.js';
+	import type { Component, Toast, ToastClasses, ToastPosition } from '$lib/internal/types.js';
 
 	interface ToastProps {
 		index: number;
@@ -16,9 +16,9 @@
 		style: string;
 		cancelButtonStyle: string;
 		actionButtonStyle: string;
-		className: string;
-		descriptionClassName: string;
-		classNames: ToastClassnames;
+		class: string;
+		descriptionClass: string;
+		classes: ToastClasses;
 	}
 </script>
 
@@ -44,10 +44,10 @@
 	export let style: ToastProps['style'] = '';
 	export let cancelButtonStyle: ToastProps['cancelButtonStyle'] = '';
 	export let actionButtonStyle: ToastProps['actionButtonStyle'] = '';
-	let className: ToastProps['className'] = '';
+	let className: ToastProps['class'] = '';
 	export { className as class };
-	export let descriptionClassName: ToastProps['descriptionClassName'] = '';
-	export let classNames: ToastProps['classNames'] = {};
+	export let descriptionClass: ToastProps['descriptionClass'] = '';
+	export let classes: ToastProps['classes'] = {};
 
 	let toastRef: HTMLLIElement | null;
 
@@ -190,13 +190,13 @@
 	role="status"
 	class={cn(
 		className,
-		toast.className,
-		classNames?.toast,
-		toast?.classNames?.toast,
+		toast.class,
+		classes?.toast,
+		toast?.classes?.toast,
 		// @ts-ignore
-		classNames?.[toastType],
+		classes?.[toastType],
 		// @ts-ignore
-		toast?.classNames?.[toastType]
+		toast?.classes?.[toastType]
 	)}
 	data-sonner-sv-toast
 	data-styled={!Boolean(toast.component || toast.unstyled)}
@@ -232,7 +232,7 @@
 			aria-label="Close toast"
 			data-disabled={disabled}
 			data-close-button
-			class={cn(classNames.closeButton, toast.classNames?.closeButton)}
+			class={cn(classes.closeButton, toast.classes?.closeButton)}
 			on:click={disabled || !dismissible
 				? noop
 				: () => {
@@ -268,7 +268,7 @@
 				{#if toast.promise || isLoading}
 					{#if loadingIcon}
 						<div
-							class={cn('loader', classNames.loader, toast.classNames?.loader)}
+							class={cn('loader', classes.loader, toast.classes?.loader)}
 							data-visible={isLoading}
 						>
 							<svelte:component this={loadingIcon} />
@@ -282,17 +282,17 @@
 		{/if}
 
 		<div data-content>
-			<span data-title class={cn(classNames.title, toast.classNames?.title)}>
+			<span data-title class={cn(classes.title, toast.classes?.title)}>
 				{toast.title}
 			</span>
 			{#if toast.description}
 				<span
 					data-description
 					class={cn(
-						descriptionClassName,
-						toast.descriptionClassName,
-						classNames.description,
-						toast.classNames?.description
+						descriptionClass,
+						toast.descriptionClass,
+						classes.description,
+						toast.classes?.description
 					)}
 				>
 					{toast.description}
@@ -305,7 +305,7 @@
 				data-button
 				data-cancel
 				style={cancelButtonStyle}
-				class={cn(classNames.cancelButton, toast.classNames?.cancelButton)}
+				class={cn(classes.cancelButton, toast.classes?.cancelButton)}
 				on:click={() => {
 					if (!dismissible) return;
 					deleteToast();
@@ -320,7 +320,7 @@
 			<button
 				data-button
 				style={actionButtonStyle}
-				class={cn(classNames.actionButton, toast.classNames?.actionButton)}
+				class={cn(classes.actionButton, toast.classes?.actionButton)}
 				on:click={(event) => {
 					toast.action?.onClick(event);
 					if (event.defaultPrevented) return;
