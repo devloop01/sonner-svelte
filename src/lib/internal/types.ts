@@ -90,8 +90,6 @@ export type PromiseToastOptions<T = unknown> = ToastOptions & {
 	finally?: () => void | Promise<void>;
 };
 
-export interface ToasterContext {}
-
 export interface HeightT {
 	height: number;
 	toastId: number | string;
