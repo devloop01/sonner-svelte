@@ -1,5 +1,11 @@
 # sonner-svelte
 
+## 0.3.1
+
+### Patch Changes
+
+- fix: unexpected remove on hover when duration set to 0, remove `duration === 0` checks ([#27](https://github.com/devloop01/sonner-svelte/pull/27))
+
 ## 0.3.0
 
 ### Minor Changes
