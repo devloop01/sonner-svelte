@@ -62,9 +62,9 @@ export interface Toast<T extends RecordT = RecordT> {
 	style?: string;
 	cancelButtonStyle?: string;
 	actionButtonStyle?: string;
-	className?: string;
-	descriptionClassName?: string;
-	classNames?: ToastClassnames;
+	class?: string;
+	descriptionClass?: string;
+	classes?: ToastClasses;
 }
 
 export type ToastOptions<T extends RecordT = RecordT> = Partial<
@@ -97,7 +97,7 @@ export interface HeightT {
 	toastId: number | string;
 }
 
-export interface ToastClassnames {
+export interface ToastClasses {
 	toast?: string;
 	title?: string;
 	description?: string;

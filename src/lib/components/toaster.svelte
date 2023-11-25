@@ -23,7 +23,7 @@
 		closeButton: boolean;
 		toastOptions: ToastOptions;
 		portal: HTMLElement | string | null;
-		className: string;
+		class: string;
 		style: string;
 		loadingIcon: Component;
 	}
@@ -81,7 +81,7 @@
 	export { portalElement as portal };
 	export let loadingIcon: ToasterProps['loadingIcon'] | undefined = undefined;
 	export let toastOptions: ToasterProps['toastOptions'] = {};
-	let className: ToasterProps['className'] = '';
+	let className: ToasterProps['class'] = '';
 	export { className as class };
 	export let style: ToasterProps['style'] = '';
 
@@ -263,9 +263,9 @@
 						{gap}
 						{expanded}
 						{loadingIcon}
-						class={toastOptions.className}
-						descriptionClassName={toastOptions.descriptionClassName}
-						classNames={toastOptions.classNames}
+						class={toastOptions.class}
+						descriptionClass={toastOptions.descriptionClass}
+						classes={toastOptions.classes}
 						style={toastOptions.style}
 						actionButtonStyle={toastOptions.actionButtonStyle}
 						cancelButtonStyle={toastOptions.cancelButtonStyle}
