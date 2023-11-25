@@ -1,5 +1,15 @@
 # sonner-svelte
 
+## 0.3.2
+
+### Patch Changes
+
+- chore: merge icons into single file ([`fe7f44d`](https://github.com/devloop01/sonner-svelte/commit/fe7f44dda5aacda8397e121e3f82d3c08d418075))
+
+- fix: promise toast not showing ([#33](https://github.com/devloop01/sonner-svelte/pull/33))
+
+- chore: remove `context` stuff ([#29](https://github.com/devloop01/sonner-svelte/pull/29))
+
 ## 0.3.1
 
 ### Patch Changes
