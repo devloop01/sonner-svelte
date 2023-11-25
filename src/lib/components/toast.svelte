@@ -99,23 +99,17 @@
 			}
 		});
 
+		toast.timeout =
+			toast.duration === Infinity
+				? null
+				: setTimeout(() => {
+						dismissToast(toast.id);
+				  }, duration || toast.duration);
+
 		return () => {
 			toast.timeout && clearTimeout(toast.timeout);
 		};
 	});
-
-	// TODO: fix hot key interaction
-
-	$: {
-		if (mounted) {
-			toast.timeout =
-				toast.duration === Infinity
-					? null
-					: setTimeout(() => {
-							dismissToast(toast.id);
-					  }, duration || toast.duration);
-		}
-	}
 
 	// if toast is dismissed, remove it
 	$: toast.dismiss && deleteToast();
