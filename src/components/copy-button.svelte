@@ -36,7 +36,7 @@
 		cursor: copy;
 		border: none;
 		border: 1px solid var(--gray6);
-		background: #fff;
+		background: var(--gray0);
 		color: var(--gray12);
 		border-radius: var(--radius);
 		width: 28px;

@@ -11,6 +11,7 @@
 
 	import type { ToastTheme, ToastPosition } from '$lib';
 	import { Toaster } from '$lib';
+	import ThemeSwitch from '@/components/theme-switch.svelte';
 
 	let expand = false;
 	let position: ToastPosition = 'bottom-right';
@@ -18,6 +19,10 @@
 	let closeButton = false;
 	let theme: ToastTheme = 'light';
 </script>
+
+<div class="theme-toggle-wrapper">
+	<ThemeSwitch bind:theme />
+</div>
 
 <div class="container">
 	<SiteHero />
@@ -37,5 +42,12 @@
 <style>
 	.container {
 		padding-top: 100px;
+	}
+
+	.theme-toggle-wrapper {
+		position: absolute;
+		top: var(--side-padding);
+		right: var(--side-padding);
+		z-index: 1000;
 	}
 </style>

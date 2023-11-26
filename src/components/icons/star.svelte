@@ -3,7 +3,7 @@
 	width="24"
 	height="24"
 	viewBox="0 0 24 24"
-	fill="white"
+	fill="currentColor"
 	stroke="currentColor"
 	stroke-width="1.5"
 	stroke-linecap="round"

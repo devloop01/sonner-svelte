@@ -77,6 +77,9 @@ devDependencies:
   svelte-check:
     specifier: ^3.6.0
     version: 3.6.0(postcss@8.4.31)(svelte@4.2.7)
+  svelte-persisted-store:
+    specifier: ^0.7.0
+    version: 0.7.0(svelte@4.2.7)
   svelte-writable-derived:
     specifier: ^3.1.0
     version: 3.1.0(svelte@4.2.7)
@@ -4561,6 +4564,15 @@ packages:
     engines: {node: ^12.20 || ^14.13.1 || >= 16}
     peerDependencies:
       svelte: ^3.19.0 || ^4.0.0
+    dependencies:
+      svelte: 4.2.7
+    dev: true
+
+  /svelte-persisted-store@0.7.0(svelte@4.2.7):
+    resolution: {integrity: sha512-PczYS60ysScQ0DmTCPXQm5rwt8FfQzSlx0lCbljbE6hTCKqXaw2bP8KH1+B7QTPmuiy/QbAk4pjYpNCmZhjyRw==}
+    engines: {node: '>=0.14'}
+    peerDependencies:
+      svelte: ^3.48.0 || >4.0.0
     dependencies:
       svelte: 4.2.7
     dev: true

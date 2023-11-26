@@ -11,6 +11,14 @@
 			src="/stats/script.js"
 			data-website-id="14207e9e-312a-442b-9059-a6b40c15d398"
 		></script>
+
+		<script>
+			localStorage.theme === '"dark"' ||
+			(!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+				? document.documentElement.classList.add('dark')
+				: document.documentElement.classList.remove('dark');
+		</script>
+
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover">

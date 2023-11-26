@@ -23,7 +23,7 @@
 
 	footer {
 		padding: 32px 0;
-		border-top: 1px solid #eee;
+		border-top: 1px solid var(--gray5);
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -35,6 +35,7 @@
 		display: flex;
 		align-items: center;
 		gap: 4px;
+		color: var(--gray12);
 	}
 
 	.footer--text a {
@@ -44,12 +45,14 @@
 		font-weight: 600;
 		padding: 4px 6px;
 		border-radius: var(--radius);
-		transition: background 0.2s ease;
+		transition: 0.2s ease;
+		transition-property: background;
+		color: var(--gray12);
 	}
 
 	.footer--text a:hover,
 	.footer--text a:focus-visible {
 		outline: none;
-		background: rgb(0 0 0 / 0.05);
+		background: var(--gray3);
 	}
 </style>

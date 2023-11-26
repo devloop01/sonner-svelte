@@ -14,7 +14,7 @@
 
 	<h1 class="heading">
 		<span class="sr-only">sonner-svelte</span>
-		<Logo aria-label="sonner-svelte" />
+		<Logo aria-label="sonner-svelte" fill="var(--gray12)" />
 	</h1>
 
 	<p>An opinionated toast component for svelte</p>
@@ -86,14 +86,14 @@
 
 	.buttons {
 		display: flex;
-		gap: 8px;
+		gap: 12px;
 		margin: 22px 0;
 	}
 
 	.button {
 		height: 40px;
 		border-radius: var(--radius);
-		border: none;
+		border: 1px solid var(--gray5);
 		background: linear-gradient(156deg, rgba(255, 255, 255, 1) 0%, rgba(240, 240, 240, 1) 100%);
 		padding: 0 30px;
 		font-weight: 600;
@@ -109,7 +109,7 @@
 		overflow: hidden;
 		cursor: pointer;
 		text-decoration: none;
-		color: hsl(0, 0%, 9%);
+		color: var(--gray12);
 		font-size: 13px;
 		display: inline-flex;
 		align-items: center;
@@ -122,9 +122,9 @@
 	}
 
 	.button[data-primary] {
-		box-shadow: 0px 0px 0px 1px var(--gray12);
+		border: 1px solid var(--gray5);
 		background: var(--gray12);
-		color: var(--gray1);
+		color: var(--gray0);
 	}
 	.button:focus-visible {
 		outline: none;
@@ -176,6 +176,44 @@
 		background: rgb(52, 52, 52);
 	}
 
+	:global(.dark) .button {
+		&[data-primary]:hover {
+			background: rgb(200, 200, 200);
+		}
+
+		&:not([data-primary]) {
+			background: linear-gradient(156deg, rgba(10, 10, 10, 1) 0%, rgba(30, 30, 30, 1) 100%);
+			box-shadow:
+				0px 0px 0px 1px rgba(255, 255, 255, 0.06),
+				0px 1px 0px 0px rgba(255, 255, 255, 0.08),
+				0px 2px 2px 0px rgba(255, 255, 255, 0.04),
+				0px 3px 3px 0px rgba(255, 255, 255, 0.02),
+				0px 4px 4px 0px rgba(255, 255, 255, 0.01);
+		}
+
+		&:not([data-primary])::after {
+			background: linear-gradient(
+				to top,
+				hsl(0, 0%, 15%) 0%,
+				hsla(0, 0%, 15%, 0.987) 8.1%,
+				hsla(0, 0%, 15%, 0.951) 15.5%,
+				hsla(0, 0%, 15%, 0.896) 22.5%,
+				hsla(0, 0%, 15%, 0.825) 29%,
+				hsla(0, 0%, 15%, 0.741) 35.3%,
+				hsla(0, 0%, 15%, 0.648) 41.2%,
+				hsla(0, 0%, 15%, 0.55) 47.1%,
+				hsla(0, 0%, 15%, 0.45) 52.9%,
+				hsla(0, 0%, 15%, 0.352) 58.8%,
+				hsla(0, 0%, 15%, 0.259) 64.7%,
+				hsla(0, 0%, 15%, 0.175) 71%,
+				hsla(0, 0%, 15%, 0.104) 77.5%,
+				hsla(0, 0%, 15%, 0.049) 84.5%,
+				hsla(0, 0%, 15%, 0.013) 91.9%,
+				hsla(0, 0%, 15%, 0) 100%
+			);
+		}
+	}
+
 	.heading {
 		display: flex;
 		flex-direction: column;
@@ -186,9 +224,9 @@
 		}
 	}
 
-	.badges {
-		/* margin: 8px 0; */
-	}
+	/* .badges {
+		margin: 8px 0;
+	} */
 
 	.badge {
 		color: var(--gray11);
@@ -238,7 +276,6 @@
 
 		.buttons {
 			flex-direction: column;
-			gap: 8px;
 		}
 	}
 </style>

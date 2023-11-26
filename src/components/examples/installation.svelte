@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { copy } from '@svelte-put/copy';
 	import { crossfade } from 'svelte/transition';
-	import { circOut } from 'svelte/easing';
+	import { backOut } from 'svelte/easing';
 
 	import CopyButton from '@/components/copy-button.svelte';
 	import { Npm, Pnpm, Yarn } from '@/components/icons';
@@ -18,8 +18,8 @@
 	let currentInstaller = installers[0];
 
 	const [send, receive] = crossfade({
-		duration: 200,
-		easing: circOut
+		duration: 250,
+		easing: backOut
 	});
 
 	function handleCopied() {
@@ -89,6 +89,7 @@
 			& svg {
 				transition: opacity 180ms ease-out;
 				opacity: 0.3;
+				z-index: 2;
 			}
 
 			& .switcher__indicator {
@@ -96,7 +97,7 @@
 				inset: 0px;
 				background: var(--gray4);
 				border-radius: var(--radius);
-				z-index: -1;
+				z-index: 1;
 			}
 
 			&:focus {
