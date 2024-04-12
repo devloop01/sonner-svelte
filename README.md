@@ -1,3 +1,5 @@
+> This project is not maintained anymore. Please consider using [`svelte-sonner`](https://github.com/wobsoriano/svelte-sonner)
+
 <p align="center">
 <a href="https://sonner-svelte.vercel.app">
 <img src="./banner.png" alt="" />
